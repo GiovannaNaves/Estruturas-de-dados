@@ -3,9 +3,8 @@
 using namespace std;
 
 
-int main() { 
-    int f; 
-    f = fatr(4);
-    cout << f << endl; 
+int main( int argc, char ** argv) { 
+    int f = atoi(argv[1]); 
+    cout << fatr(f) << endl; 
      
 }

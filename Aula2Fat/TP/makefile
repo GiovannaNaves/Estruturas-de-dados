@@ -4,8 +4,10 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/fatop.o $(OBJ)/fat.o 
-HDRS = $(INC)/fat.h 
+OBJSFAT = $(OBJ)/fatop.o $(OBJ)/fat.o 
+HDRSFIB = $(INC)/fat.h 
+OBJSFAT = $(OBJ)/fibop.o $(OBJ)/fib.o 
+HDRSFIB = $(INC)/fib.h 
 CFLAGS = -Wall -c -I$(INC)
 
 EXEFAT = $(BIN)/fatop
@@ -18,24 +20,28 @@ fib: $(EXEFIB)
 	$(EXEFIB)
 
 
-$(BIN)/fatop: $(OBJS)
-	$(CC) -pg -o $(BIN)/fatop $(OBJS) $(LIBS)
+$(BIN)/fatop: $(OBJSFAT)
+	$(CC) -pg -o $(BIN)/fatop $(OBJSFAT) $(LIBS)
 
-$(OBJ)/fatop.o: $(HDRS) $(SRC)/fatop.cpp
+$(OBJ)/fatop.o: $(HDRSFAT) $(SRC)/fatop.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fatop.o $(SRC)/fatop.cpp
 
-$(OBJ)/fat.o: $(HDRS) $(SRC)/fat.cpp
+$(OBJ)/fat.o: $(HDRSFAT) $(SRC)/fat.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fat.o $(SRC)/fat.cpp
 
 
-$(BIN)/fatop: $(OBJS)
-	$(CC) -pg -o $(BIN)/fatop $(OBJS) $(LIBS)
 
-$(OBJ)/fatop.o: $(HDRS) $(SRC)/fatop.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/fatop.o $(SRC)/fatop.cpp
+$(BIN)/fibop: $(OBJSFIB)
+	$(CC) -pg -o $(BIN)/fibop $(OBJSFIB) $(LIBS)
 
-$(OBJ)/fat.o: $(HDRS) $(SRC)/fat.cpp
+$(OBJ)/fibop.o: $(HDRSFIB) $(SRC)/fibop.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/fibop.o $(SRC)/fibop.cpp
+
+$(OBJ)/fib.o: $(HDRSFIB) $(SRC)/fat.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fat.o $(SRC)/fat.cpp
 	
-clean:
-	rm -f $(EXE) $(OBJS) gmon.out
+cleanfat:
+	rm -f $(EXE) $(OBJSFAT) gmon.out
+
+cleanfib:
+	rm -f $(EXE) $(OBJSFIB) gmon.out
