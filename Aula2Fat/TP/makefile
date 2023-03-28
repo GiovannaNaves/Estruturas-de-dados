@@ -5,8 +5,8 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJSFAT = $(OBJ)/fatop.o $(OBJ)/fat.o 
-HDRSFIB = $(INC)/fat.h 
-OBJSFAT = $(OBJ)/fibop.o $(OBJ)/fib.o 
+HDRSFAT = $(INC)/fat.h 
+OBJSFIB = $(OBJ)/fibop.o $(OBJ)/fib.o 
 HDRSFIB = $(INC)/fib.h 
 CFLAGS = -Wall -c -I$(INC)
 
@@ -16,7 +16,7 @@ EXEFIB = $(BIN)/fibop
 fat:  $(EXEFAT)
 	$(EXEFAT)
 
-fib: $(EXEFIB)
+fib:  $(EXEFIB)
 	$(EXEFIB)
 
 
@@ -37,7 +37,7 @@ $(BIN)/fibop: $(OBJSFIB)
 $(OBJ)/fibop.o: $(HDRSFIB) $(SRC)/fibop.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fibop.o $(SRC)/fibop.cpp
 
-$(OBJ)/fib.o: $(HDRSFIB) $(SRC)/fat.cpp
+$(OBJ)/fib.o: $(HDRSFIB) $(SRC)/fib.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fib.o $(SRC)/fib.cpp
 	
 cleanfat:
