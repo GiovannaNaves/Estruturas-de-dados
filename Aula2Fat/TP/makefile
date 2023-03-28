@@ -38,7 +38,7 @@ $(OBJ)/fibop.o: $(HDRSFIB) $(SRC)/fibop.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/fibop.o $(SRC)/fibop.cpp
 
 $(OBJ)/fib.o: $(HDRSFIB) $(SRC)/fat.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/fat.o $(SRC)/fat.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/fib.o $(SRC)/fib.cpp
 	
 cleanfat:
 	rm -f $(EXE) $(OBJSFAT) gmon.out
