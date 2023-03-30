@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 
 #ifndef FATH
 #define FATH

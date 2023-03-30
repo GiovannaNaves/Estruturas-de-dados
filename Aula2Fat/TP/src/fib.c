@@ -1,7 +1,5 @@
 #include "fib.h"
 
-using namespace std;
-
 int fibr(int n) { 
     if (n < 3) 
         return 1; 

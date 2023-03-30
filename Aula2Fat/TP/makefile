@@ -1,4 +1,4 @@
-CC = c
+CC = gcc
 LIBS = -lm
 SRC = src
 OBJ = obj
@@ -10,15 +10,11 @@ OBJSFIB = $(OBJ)/fibop.o $(OBJ)/fib.o
 HDRSFIB = $(INC)/fib.h 
 CFLAGS = -Wall -c -pg -ftest-coverage -I$(INC)
 
-EXEFAT = $(BIN)/fatop
-EXEFIB = $(BIN)/fibop
+EXE = $(BIN)/fatop $(BIN)/fibop
 
-fat:  $(EXEFAT)
-	$(EXEFAT) 
-
-fib:  $(EXEFIB)
-	$(EXEFIB) 
-
+run: $(EXE)
+	$(BIN)/fatop
+	$(BIN)/fibop
 
 $(BIN)/fatop: $(OBJSFAT)
 	$(CC) -pg -o $(BIN)/fatop $(OBJSFAT) $(LIBS) -pg

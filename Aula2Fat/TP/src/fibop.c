@@ -1,18 +1,17 @@
 #include "fib.h"
 #include <sys/time.h>
 #include <sys/resource.h>
-
-
-using namespace std;
+#define _POSIX_MONOTONIC_CLOCK 200112L
+#include <time.h>
 
 
 int main( int argc, char ** argv) { 
     struct rusage it_start, it_end, rec_start, rec_end;
     struct timespec it_start_clock, it_end_clock, rec_start_clock, rec_end_clock;
-    int out_it, out_rec, max = 55;
+    int out_it, out_rec, max = 5;
     double total_rec_sys_time, total_rec_user_time, total_rec_clock_time, total_it_sys_time, total_it_user_time, total_it_clock_time;
 
-    for (int n = 1; n <= max; n++){
+    for (int n = 5; n <= max; n++){
         getrusage(RUSAGE_SELF, &it_start);
         clock_gettime(CLOCK_MONOTONIC, &it_start_clock);
 
@@ -44,9 +43,9 @@ int main( int argc, char ** argv) {
         total_it_user_time += it_user_time;
         total_it_sys_time += it_sys_time;
         
-        printf("Fibonacci iterativo de %d: executou em %lfs de usuario, em %lfs de sistema e %lf de relogio.\n", n, it_user_time, it_sys_time, it_clock_time);
-        printf("Fibonacci recursivo de %d: executou em %lfs de usuario, em %lfs de sistema e %lf de relogio.\n", n, rec_user_time, rec_sys_time, rec_clock_time);
+        printf("Fibonacci de %d: %d.\n", n, fibi(n));
+        printf("Fibonacci iterativo de %d: executou em %fs de usuario, em %fs de sistema e %f de relogio.\n", n, it_user_time, it_sys_time, it_clock_time);
+        printf("Fibonacci recursivo de %d: executou em %fs de usuario, em %fs de sistema e %f de relogio.\n", n, rec_user_time, rec_sys_time, rec_clock_time);
     }
-    printf("Fibonacci iterativo de 1 a %d: executou em %lfs de usuario, em %lfs de sistema e %lf de relogio.\n", max, total_it_user_time, total_it_sys_time, total_it_clock_time);
-    printf("Fibonacci recursivo de 1 a %d: executou em %lfs de usuario, em %lfs de sistema e %lf de relogio.\n", max, total_rec_user_time, total_rec_sys_time, total_rec_clock_time);
+
 }
