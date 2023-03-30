@@ -22,5 +22,7 @@ int main( int argc, char ** argv) {
         res-> tv_nsec = t2.tv_nsec-t1.tv_nsec;
         res-> tv_sec = t2.tv_sec-t1.tv_sec;
     } */
-     
+    
+    cout << fati(n) << endl; 
+
 }

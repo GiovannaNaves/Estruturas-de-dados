@@ -14,10 +14,10 @@ EXEFAT = $(BIN)/fatop
 EXEFIB = $(BIN)/fibop
 
 fat:  $(EXEFAT)
-	$(EXEFAT)
+	$(EXEFAT) 5
 
 fib:  $(EXEFIB)
-	$(EXEFIB)
+	$(EXEFIB) 5
 
 
 $(BIN)/fatop: $(OBJSFAT)
