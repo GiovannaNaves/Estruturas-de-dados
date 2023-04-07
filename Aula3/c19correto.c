@@ -14,17 +14,18 @@ int sum_to_n(int num)
 
 void printSum()
 {
-    char line[10];
+    char line[100];
     printf("enter a number:\n");
-    fgets(line, 10, stdin);
-    if(line != NULL) 
-        strtok(line, "\n"); 
+    fgets(line, 100, stdin);
+    line[strcspn(line, "\n")] = '\0'; 
     sprintf(buf,"sum=%d",sum_to_n(atoi(line)));
     printf("%s\n",buf);
 }
 
 int main(void)
 {
+     buf = malloc(100);
     printSum();
+    free(buf);
     return 0;
 }

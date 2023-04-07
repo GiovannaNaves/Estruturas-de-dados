@@ -11,5 +11,5 @@ int main(int argc, char** argv) {
      a = inc(a);
   }
 
-  return argc;
+  return 0;
 }
