@@ -1,0 +1,48 @@
+O erro desse código era que nenhum valor estava sendo atribuido a x, logo, não era possivel testar se x era igual a zero ou não. Assim, atribui 0 a x e o programa funcionou.
+
+Script started on 2023-04-07 10:52:06-03:00 [TERM="xterm-256color" TTY="/dev/pts/1" COLUMNS="139" LINES="12"]
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[00m$ gcc -g c12correto.c
+[?2004l
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[00m$ [7mvalgrind --leak-check=full ./programa[27m[1Pvalgrind --leak-check=full ./program[K[K[K[K[K[K[Ka.out
+[?2004l
+==221== Memcheck, a memory error detector
+==221== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==221== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==221== Command: ./a.out
+==221== 
+==221== Conditional jump or move depends on uninitialised value(s)
+==221==    at 0x109159: main (c12correto.c:6)
+==221== 
+X is zero==221== 
+==221== HEAP SUMMARY:
+==221==     in use at exit: 0 bytes in 0 blocks
+==221==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==221== 
+==221== All heap blocks were freed -- no leaks are possible
+==221== 
+==221== Use --track-origins=yes to see where uninitialised values come from
+==221== For lists of detected and suppressed errors, rerun with: -s
+==221== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[00m$ gcc -g c12correto.c
+[?2004l
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[00m$ [7mvalgrind --leak-check=full ./programa[27m[1Pvalgrind --leak-check=full ./program[K[K[K[K[K[K[Ka.out
+[?2004l
+==230== Memcheck, a memory error detector
+==230== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==230== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==230== Command: ./a.out
+==230== 
+X is zero==230== 
+==230== HEAP SUMMARY:
+==230==     in use at exit: 0 bytes in 0 blocks
+==230==   total heap usage: 1 allocs, 1 frees, 1,024 bytes allocated
+==230== 
+==230== All heap blocks were freed -- no leaks are possible
+==230== 
+==230== For lists of detected and suppressed errors, rerun with: -s
+==230== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-04-07 10:53:01-03:00 [COMMAND_EXIT_CODE="0"]

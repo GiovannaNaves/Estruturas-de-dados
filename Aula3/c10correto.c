@@ -1,14 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define MAX_ITERATIONS 100 // Maximum number of iterations before exiting the loop
+#define MAX 100 
 
 
 int main(void)
 {
         int *p;
         int i = 0;
-        while(i<MAX_ITERATIONS)
+        while(i<MAX)
         {
                 p = malloc(128);
                 printf("%ld\n", (long)p);       
