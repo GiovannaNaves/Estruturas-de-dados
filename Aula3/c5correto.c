@@ -20,6 +20,6 @@ int main() {
 
     printf("intArray[%d]: %d\n", randNum, intArray[randNum]);
 
-    // end without freeing!
+    free(intArray);
     return 0;
 }

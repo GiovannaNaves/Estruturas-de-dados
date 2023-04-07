@@ -1,0 +1,122 @@
+A memória do "intArray" não estava sendo liberada. Então, coloquei um free para que ela fosse liberada no final da função.
+
+Script started on 2023-04-06 21:23:48-03:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="85" LINES="12"]
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/A
+
+ula3[00m$ gcc -g c5correto.c
+[?2004l
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/A
+
+ula3[00m$ [7mvalgrind --leak-check=full[27m
+[C[C[C[C[C[Cvalgrind --leak-check=full ./a.out
+[?2004l
+==184== Memcheck, a memory error detector
+==184== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==184== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==184== Command: ./a.out
+==184== 
+intArray[350]: 350
+==184== 
+==184== HEAP SUMMARY:
+==184==     in use at exit: 4,000 bytes in 1 blocks
+==184==   total heap usage: 2 allocs, 1 frees, 5,024 bytes allocated
+==184== 
+==184== 4,000 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==184==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==184==    by 0x1091E7: main (c5correto.c:9)
+==184== 
+==184== LEAK SUMMARY:
+==184==    definitely lost: 4,000 bytes in 1 blocks
+==184==    indirectly lost: 0 bytes in 0 blocks
+==184==      possibly lost: 0 bytes in 0 blocks
+==184==    still reachable: 0 bytes in 0 blocks
+==184==         suppressed: 0 bytes in 0 blocks
+==184== 
+==184== For lists of detected and suppressed errors, rerun with: -s
+==184== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/A
+
+ula3[00m$ gcc -g c5correto.c
+[?2004l
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/A
+
+ula3[00m$ #include<stdlib.h>
+
+#include<stdio.h>
+
+#include<time.h>
+
+
+const int ARR_SIZE = 1000;
+
+
+int main() {
+
+    // create an array of ARR_SIZE ints
+
+    int *intArray = malloc(sizeof(int) * ARR_SIZE);
+
+
+    // populate them
+
+    for (int i=0; i < ARR_SIZE; i++) {
+        intArray[i] = i;
+[7m    }[27m
+[7m    // print one out[27m
+[7m    // first, seed the random number generator[27m
+[7m    srand(time(NULL));[27m
+[7m    int randNum = rand() % ARR_SIZE;[27m
+[7m    printf("intArray[%d]: %d\n", randNum, intArray[randNum]);[27m
+[7m    // end without freeing![27m
+[7m    return 0;[27m
+[7m}[27m
+    }
+    // print one out
+    // first, seed the random number generator
+    srand(time(NULL));
+    int randNum = rand() % ARR_SIZE;
+    printf("intArray[%d]: %d\n", randNum, intArray[randNum]);
+    // end without freeing!
+    return 0;
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[K[C[C[C[C[C[K[K[K[K
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[7mvalgrind --leak-check=full ./programa[27m
+[C[C[C[C[C[C[1Pvalgrind --leak-check=full ./program[K[K[K[K[K[K[Ka.out
+[?2004l
+==190== Memcheck, a memory error detector
+==190== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==190== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==190== Command: ./a.out
+==190== 
+intArray[574]: 574
+==190== 
+==190== HEAP SUMMARY:
+==190==     in use at exit: 0 bytes in 0 blocks
+==190==   total heap usage: 2 allocs, 2 frees, 5,024 bytes allocated
+==190== 
+==190== All heap blocks were freed -- no leaks are possible
+==190== 
+==190== For lists of detected and suppressed errors, rerun with: -s
+==190== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+[?2004h]0;gionaves@Flavia: /mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/Aula3[01;32mgionaves@Flavia[00m:[01;34m/mnt/c/Users/giona/OneDrive/Área de Trabalho/aa/Estruturas-de-dados/A
+
+ula3[00m$ exit
+[?2004l
+exit
+
+Script done on 2023-04-06 21:26:33-03:00 [COMMAND_EXIT_CODE="0"]
