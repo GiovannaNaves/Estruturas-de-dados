@@ -1,14 +1,29 @@
+#include "fila.hpp"
+  
+Pilha::Pilha(){
 
+}
 
+void Pilha::PilhaVazia(){
 
+}
 
-int main(){
-    Pilha p;
-    p.Empilhar(1);
-    p.Empilhar(2);
-    p.Empilhar(3);
+void Pilha::Empilhar(int p){
 
-    cout << p.Desempilhar() << endl;
-    cout << p.Desempilhar() << endl;
-    cout << p.Desempilhar() << endl;
+}
+
+int Pilha::Desempilhar(){
+
+}
+
+int Pilha::GetTopo(){
+
+}
+
+int Pilha::GetTamanho(){
+
+}
+
+void Pilha::Limpa(){
+    
 }
