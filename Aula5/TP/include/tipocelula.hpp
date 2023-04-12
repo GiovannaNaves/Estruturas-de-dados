@@ -5,12 +5,12 @@ template< typename Tipo>
 class TipoCelula { 
     public: 
         TipoCelula(){ 
-            item.SetChave(-1); 
+            item = -1; 
             prox = NULL; 
         } 
         
     private: 
-        TipoItem item; 
+        int item; 
         TipoCelula *prox; 
         friend class FilaEncadeada; 
 };

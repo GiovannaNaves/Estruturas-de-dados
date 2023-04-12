@@ -3,14 +3,14 @@
 #include "fila.hpp"
 #include "tipocelula.hpp"
 
-template< typename Tipo>
 class FilaEncadeada : public Fila { 
     public: FilaEncadeada(); 
         virtual ~FilaEncadeada(); 
 
-        void Enfileira(TipoItem item); 
-        TipoItem Desenfileira(); 
+        void Enfileira(int item); 
+        int Desenfileira(); 
         void Limpa(); 
+        TipoCelula* GetFrente();
 
     private: 
         TipoCelula* frente; 
