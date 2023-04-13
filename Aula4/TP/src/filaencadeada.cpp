@@ -22,7 +22,7 @@ void FilaEncadeada::Enfileira(int item){
 
 }
 
-int FilaEncadeada::Densenfileira(){
+int FilaEncadeada::Desenfileira(){
     TipoCelula *p;
     int aux;
 

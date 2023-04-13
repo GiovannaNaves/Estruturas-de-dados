@@ -1,49 +1,87 @@
-#include "fila.hpp"
 #include "pilha.hpp"
   
+
 Pilha::Pilha(){
-    topo = NULL;
-    tamanho = 0;
+    primeira_fila = new FilaEncadeada();
 }
 
 void Pilha::PilhaVazia(){
-    topo = NULL;
-    tamanho = 0;
+    if(primeira_fila->Vazia())
+        cout << "Pilha vazia!" << endl;
+    else
+        cout << "Pilha nao vazia!" << endl;
 }
 
 void Pilha::Empilhar(int p){
-    TipoCelula<int> *nova = new TipoCelula<int>();
-    nova->item = p;
-    nova->prox = topo;
-    topo = nova;
-    tamanho++;
+    primeira_fila->Enfileira(p);
 }
 
 int Pilha::Desempilhar(){
-    if(tamanho == 0) throw "Pilha vazia!";
-    TipoCelula<int> *p = topo;
-    int aux = topo->item;
-    topo = topo->prox;
-    delete p;
-    tamanho--;
+    FilaEncadeada *nova_fila;
+    TipoCelula *p, *q;
+    int aux;
+
+    if(primeira_fila->Vazia()) throw "Pilha vazia!";
+
+    nova_fila = new FilaEncadeada();
+
+    p = primeira_fila->GetFrente();
+    while(p->prox != NULL){
+        q = p->prox;
+        nova_fila->Enfileira(q->item);
+        p = p->prox;
+    }
+
+    aux = p->item;
+
+    primeira_fila->Limpa();
+
+    p = nova_fila->GetFrente();
+    while(p->prox != NULL){
+        q = p->prox;
+        primeira_fila->Enfileira(q->item);
+        p = p->prox;
+    }
+
+    delete nova_fila;
+
     return aux;
 }
 
 int Pilha::GetTopo(){
-    if(tamanho == 0) throw "Pilha vazia!";
-    return topo->item;
+    FilaEncadeada *nova_fila;
+    TipoCelula *p, *q;
+    int aux;
+
+    if(primeira_fila->Vazia()) throw "Pilha vazia!";
+
+    nova_fila = new FilaEncadeada();
+
+    p = primeira_fila->GetFrente();
+    while(p->prox != NULL){
+        q = p->prox;
+        nova_fila->Enfileira(q->item);
+        p = p->prox;
+    }
+
+    aux = p->item;
+
+    p = nova_fila->GetFrente();
+    while(p->prox != NULL){
+        q = p->prox;
+        primeira_fila->Enfileira(q->item);
+        p = p->prox;
+    }
+
+    delete nova_fila;
+
+    return aux;
 }
 
 int Pilha::GetTamanho(){
-    return tamanho;
+    return primeira_fila->GetTamanho();
 }
 
 void Pilha::Limpa(){
-    TipoCelula<int> *p;
-    while(topo != NULL){
-        p = topo;
-        topo = topo->prox;
-        delete p;
-    }
-    tamanho = 0;
+    primeira_fila->Limpa();
 }

@@ -2,6 +2,7 @@
 #define PILHA_H
 
 #include "filaencadeada.hpp"
+#include "tipocelula.hpp"
 
 class Pilha{
     public:

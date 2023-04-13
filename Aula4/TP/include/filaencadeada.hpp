@@ -6,7 +6,6 @@
 class FilaEncadeada : public Fila { 
     public: FilaEncadeada(); 
         virtual ~FilaEncadeada(); 
-
         void Enfileira(int item); 
         int Desenfileira(); 
         void Limpa(); 

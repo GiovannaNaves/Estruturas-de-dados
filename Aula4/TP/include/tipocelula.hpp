@@ -12,6 +12,7 @@ class TipoCelula {
         int item; 
         TipoCelula *prox; 
         friend class FilaEncadeada; 
+        friend class Pilha; 
 };
 
 #endif

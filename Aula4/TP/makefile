@@ -1,4 +1,4 @@
-CC = gcc
+CC = c++
 LIBS = -lm
 SRC = src
 OBJ = obj
