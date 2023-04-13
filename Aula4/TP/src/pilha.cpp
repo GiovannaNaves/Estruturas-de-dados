@@ -33,7 +33,7 @@ int Pilha::Desempilhar(){
     }
 
     aux = p->item;
-
+    nova_fila->Enfileira(aux);
     primeira_fila->Limpa();
 
     p = nova_fila->GetFrente();
