@@ -1,5 +1,5 @@
 #include "pilha.hpp"
-#include <ostdlib>
+#include <cstdlib>
 #include <ctime>
 
 using namespace std;

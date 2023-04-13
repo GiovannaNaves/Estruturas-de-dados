@@ -14,6 +14,6 @@ class Pilha{
         void Limpa();
     private:
         FilaEncadeada* primeira_fila;
-}
+};
 
 #endif

@@ -1,4 +1,5 @@
 #include "fila.hpp"
+#include "pilha.hpp"
   
 Pilha::Pilha(){
     topo = NULL;
