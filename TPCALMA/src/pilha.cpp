@@ -1,35 +1,37 @@
-        Pilha::Pilha(){
-            tamanho = 0;
-            topo = -1;
-        };
+#include "pilha.hpp"
 
-        int Pilha::GetTamanho() {return tamanho;};
+Pilha<T>::Pilha(){
+    tamanho = 0;
+    topo = -1;
+};
 
-        bool Pilha::Vazia() {return tamanho == 0;};
+int Pilha<T>::GetTamanho() {return tamanho;};
 
-        virtual void Pilha::Empilha(TipoItem item){
-            if(tamanho == MAXTAM)
-                throw "A pilha está cheia!";
+bool Pilha<T>::Vazia() {return tamanho == 0;};
 
-            topo++;
-            itens[topo] = item;
-            tamanho++;
+void Pilha<T>::Empilha(TipoItem item){
+    if(tamanho == MAXTAM)
+        throw "A pilha está cheia!";
 
-        };
-        
-        virtual TipoItem Pilha::Desempilha() {
-            TipoItem aux;
-            
-            if(tamanho == 0)
-                throw "A pilha está vazia!";
-            
-            aux = itens[topo]
-            topo--;
-            tamanho--;
-            return aux;;
-        };
+    topo++;
+    itens[topo] = item;
+    tamanho++;
 
-        virtual void Pilha::Limpa() {
-            topo = -1
-            tamanho = 0;
-        };
+};
+
+T Pilha::Desempilha() {
+    TipoItem aux;
+    
+    if(tamanho == 0)
+        throw "A pilha está vazia!";
+    
+    aux = itens[topo]
+    topo--;
+    tamanho--;
+    return aux;;
+};
+
+void Pilha::Limpa() {
+    topo = -1
+    tamanho = 0;
+};

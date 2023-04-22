@@ -1,25 +1,26 @@
-//implementação geral de uma pilha
+// implementação geral de uma pilha
 
+template <typename T>
 class Pilha
 {
-    public:
-        Pilha();
+public:
+    Pilha();
 
-        int GetTamanho() {return tamanho;};
+    int GetTamanho() { return tamanho; };
 
-        bool Vazia() {return tamanho == 0;};
+    bool Vazia() { return tamanho == 0; };
 
-        virtual void Empilha(TipoItem item);
-        
-        virtual TipoItem Desempilha();
+    void Empilha(T item);
 
-        virtual void Limpa()};
+    T Desempilha();
 
+    void Limpa();
 
-    protected:
-        int tamanho;
-        int topo;
-        static const int MAXTAM = 100;
-        TipoItem itens[MAXTAM];
+    T Topo() { return topo; }
 
+protected:
+    int tamanho;
+    T topo;
+    static const int MAXTAM = 100;
+    T itens[MAXTAM];
 };
