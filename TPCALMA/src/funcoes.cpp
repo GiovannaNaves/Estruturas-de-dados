@@ -57,7 +57,7 @@ std::string TransformaEmPosfixo(std::string infixo) {
     return posfixo_final;
 }
 
-// se INFIXoA: printar a arvore como infixoa
+// se INFIXA: printar a arvore como infixoa
 
 
 // se POSFIXA: printar a arvore como posfixa
