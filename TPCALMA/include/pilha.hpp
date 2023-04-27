@@ -3,24 +3,24 @@
 template <typename T>
 class Pilha
 {
-    public:
-        Pilha();
+public:
+    Pilha();
 
-        int GetTamanho();
+    int GetTamanho();
 
-        bool Vazia();
+    bool Vazia();
 
-        void Empilha(T item);
+    void Empilha(T item);
 
-        T Desempilha();
+    T Desempilha();
 
-        void Limpa();
+    void Limpa();
 
-        T Topo() { return topo; }
+    T Topo() { return topo; }
 
-    protected:
-        int tamanho;
-        T topo;
-        static const int MAXTAM = 100;
-        T itens[MAXTAM];
+protected:
+    int tamanho;
+    T topo;
+    static const int MAXTAM = 100;
+    T itens[MAXTAM];
 };

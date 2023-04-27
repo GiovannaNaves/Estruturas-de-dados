@@ -1,53 +1,68 @@
+#include <iostream>
 #include "arvore.hpp"
+#include "pilha.hpp"
 
-void ArvoreExp::ConstruirArvore(std::string exp) {
-    Pilha<TipoNo*> p;
+bool isOperator(std::string c)
+{
+    return c == "+" || c == "-" || c == "*" || c == "/";
+}
 
-    for (auto elemento : exp) {
-        TipoNo* no = new TipoNo(elemento);
+void ArvoreExp::ConstruirArvore(std::string exp)
+{
+    Pilha<ArvoreExp::No *> p;
 
-        if (isOperador(elemento)) {
-            no.dir = p.Desempilha();
-            no.esq = p.Desempilha();
+    for (auto e : exp)
+    {
+        std::string elemento(1, e);
+        ArvoreExp::No *no = new ArvoreExp::No(elemento);
+
+        if (isOperator(elemento))
+        {
+            no->dir = p.Pilha::Desempilha();
+            no->esq = p.Pilha::Desempilha();
         }
 
         p.Empilha(no);
     }
-    
-    this->raiz = p.Desempilha();
+
+    this->raiz = p.Pilha::Desempilha();
 }
 
-float ArvoreExp::Resolver() {
-
+float ArvoreExp::Resolver()
+{
+    return 0;
 }
 
-
-
-void ArvoreExp::PrintarPosOrdem(node) {
-    if (node->left != NULL) {
-        return Buscar(node->left)
-    }
-    
-    if (node->right != NULL) {
-        return Buscar(node->right)
+void ArvoreExp::PrintarPosOrdem(No *node)
+{
+    if (node->esq != NULL)
+    {
+        return PrintarPosOrdem(node->esq);
     }
 
-    printf(node->valor);
+    if (node->dir != NULL)
+    {
+        return PrintarPosOrdem(node->dir);
+    }
+
+    std::cout << node->valor << " ";
 }
 
+void ArvoreExp::PrintarEmOrdem(No *node)
+{
+    std::cout << "( ";
 
-void ArvoreExp::PrintarEmOrdem(node) {
-    printf("(");
-
-    if (node->left != NULL) {
-        return Buscar(node->left);
-    }
-    
-    printf(node->valor);
-    
-    if (node->right != NULL) {
-        return Buscar(node->right);
+    if (node->esq != NULL)
+    {
+        return PrintarEmOrdem(node->esq);
     }
 
-    printf(")");
+    std::cout << node->valor << " ";
+
+    if (node->dir != NULL)
+    {
+        return PrintarEmOrdem(node->dir);
+    }
+
+    std::cout << ") ";
 }
