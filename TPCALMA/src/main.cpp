@@ -48,7 +48,8 @@ int main(int argc, char* argv[]) {
 
           // Se pre transforma em pos
           if (tipo == "pre") {
-               exp = TransformaEmPosfixo(exp);
+            Funcoes exp_nova;
+                exp = exp_nova.TransformaEmPosfixo(exp);
           }
 
           // Aqui temos a expressao como pós -> construir a arvore
