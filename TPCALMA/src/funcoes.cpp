@@ -23,7 +23,7 @@ int precedence(const std::string &op)
 // se LER: armazenar a exp
 std::string Funcoes::TransformaEmPosfixo(std::string infixo)
 {
-    Pilha<std::string> pilhaOp();
+    Pilha<std::string> pilhaOp = Pilha<std::string>();
     std::string posfixo_final;
     std::string elemento;
 

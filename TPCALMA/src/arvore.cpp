@@ -9,7 +9,7 @@ bool isOperator(std::string c)
 
 void ArvoreExp::ConstruirArvore(std::string exp)
 {
-    Pilha<ArvoreExp::No *> p;
+    Pilha<ArvoreExp::No *> p = Pilha<ArvoreExp::No *>();
 
     for (auto e : exp)
     {
@@ -18,8 +18,8 @@ void ArvoreExp::ConstruirArvore(std::string exp)
 
         if (isOperator(elemento))
         {
-            no->dir = p.Pilha::Desempilha();
-            no->esq = p.Pilha::Desempilha();
+            no->dir = p.Desempilha();
+            no->esq = p.Desempilha();
         }
 
         p.Empilha(no);
