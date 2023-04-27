@@ -54,8 +54,10 @@ int main(int argc, char* argv[]) {
           arvore.ConstruirArvore(exp);
 
         } else if (line[0] == "I") {
-
+            //chamar a PrintarEmOrdem
+            
         } else if (line[0] == "P") {
+            
 
         } else if (line[0] == "R") {
 

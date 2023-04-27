@@ -1,0 +1,21 @@
+   0 (0)
+       1 (1)
+           2 (2)
+               3 (3)
+               4 (3)
+           5 (2)
+               6 (3)
+               7 (3)
+       8 (1)
+           9 (2)
+1 é ancestral, 0 não é
+0 testando ancestral(4,5) -> 0
+1 testando ancestral(7,2) -> 0
+2 testando ancestral(9,5) -> 0
+3 testando ancestral(2,9) -> 0
+4 testando ancestral(1,2) -> 1
+5 testando ancestral(2,7) -> 0
+6 testando ancestral(1,4) -> 1
+7 testando ancestral(4,6) -> 0
+8 testando ancestral(6,3) -> 0
+9 testando ancestral(5,9) -> 0
