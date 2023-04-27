@@ -1,11 +1,8 @@
 #include <string>
-
-//identifica qual operação ele quer
-
-
+#include "funcoes.hpp"
 
 // se LER: armazenar a exp
-std::string TransformaEmPosfixo(std::string infixo) {
+std::string Funcoes::TransformaEmPosfixo(std::string infixo) {
     Pilha<char> pilhaOp;
     std::string posfixo_final;
     std::string elemento;
@@ -57,10 +54,3 @@ std::string TransformaEmPosfixo(std::string infixo) {
     return posfixo_final;
 }
 
-// se INFIXA: printar a arvore como infixoa
-
-
-// se POSFIXA: printar a arvore como posfixa
-
-
-// se RESOLVE

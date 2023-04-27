@@ -1,8 +1,7 @@
+#pragma once
 class Funcoes{
-    public:
-        //Ler
-        std::string TransformaEmPosfixo(std::string infixo)
-        //Infixa
-        //Posfixa
-        //Calcular
-}
+    
+        std::string TransformaEmPosfixo(std::string infixo);
+
+
+};

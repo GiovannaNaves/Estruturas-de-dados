@@ -4,19 +4,21 @@
 #include <string>
 
 class ArvoreExp {
-public:
-    struct No {
-        std::string valor;
-        No* esq;
-        No* dir;
-    }
+    public:
+        struct No {
+            std::string valor;
+            No* esq;
+            No* dir;
+        };
 
-    ArvoreExp();
-    ~ArvoreExp();
+        ArvoreExp();
+        ~ArvoreExp();
 
-    void ConstruirArvore(std::string);
-    float Resolver();
+        void ConstruirArvore(std::string);
+        void PrintarEmOrdem(No);
+        void PrintarPosOrdem(No);
+        float Resolver();
 
-private:
-    TipoNo* raiz;    
-}
+    private:
+        No *raiz;    
+};

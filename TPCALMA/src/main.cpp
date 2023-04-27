@@ -3,6 +3,7 @@
 #include <string>
 
 #include "arvore.hpp"
+#include "funcoes.hpp"
 
 
 int main(int argc, char* argv[]) {
@@ -31,7 +32,7 @@ int main(int argc, char* argv[]) {
      while (std::getline(infile, line)) {
           
 
-        if (line[0] == "L") {
+        if (line[0] == 'L') {
           // Por padrao identificamos como pos
           std::string tipo = "pos";
 
@@ -39,7 +40,7 @@ int main(int argc, char* argv[]) {
           int comeco_exp = line.find_first_not_of(" \t", 3);
 
           // Se houver um parenteses então é prefixo
-          if (line[comeco_exp] == "(")
+          if (line[comeco_exp] == '(')
                tipo = "pre";
           
           // Guarda a expressao
@@ -53,13 +54,14 @@ int main(int argc, char* argv[]) {
           // Aqui temos a expressao como pós -> construir a arvore
           arvore.ConstruirArvore(exp);
 
-        } else if (line[0] == "I") {
+        } else if (line[0] == 'I') {
             //chamar a PrintarEmOrdem
+            //arvore.PrintarEmOrdem(arvore.raiz); //ver como passar o no
             
-        } else if (line[0] == "P") {
-            
+        } else if (line[0] == 'P') {
+            //arvore.PrintarPosOrdem(arvore.raiz); //ver como passar o no
 
-        } else if (line[0] == "R") {
+        } else if (line[0] == 'R') {
 
         } 
         
