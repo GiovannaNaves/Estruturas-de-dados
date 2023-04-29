@@ -28,9 +28,27 @@ void ArvoreExp::ConstruirArvore(std::string exp)
     this->raiz = p.Pilha::Desempilha();
 }
 
-float ArvoreExp::Resolver()
+double ArvoreExp::Resolver(No *node)
 {
-    return 0;
+    if (node->left == nullptr && node->right == nullptr) {
+        // O nó é um operando
+        return stod(node->value);
+    } else {
+        // O nó é um operador
+        double leftValue = evaluate(node->left);
+        double rightValue = evaluate(node->right);
+        if (node->value == "+") {
+            return leftValue + rightValue;
+        } else if (node->value == "-") {
+            return leftValue - rightValue;
+        } else if (node->value == "*") {
+            return leftValue * rightValue;
+        } else if (node->value == "/") {
+            return leftValue / rightValue;
+        } else {
+            throw runtime_error("Operador inválido");
+        }
+    }
 }
 
 void ArvoreExp::PrintarPosOrdem(No *node)

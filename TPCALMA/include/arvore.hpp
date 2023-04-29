@@ -25,7 +25,7 @@ public:
     void ConstruirArvore(std::string);
     void PrintarEmOrdem(No *node);
     void PrintarPosOrdem(No *node);
-    float Resolver();
+    double Resolver(No *node);
 
 private:
     No *raiz;
