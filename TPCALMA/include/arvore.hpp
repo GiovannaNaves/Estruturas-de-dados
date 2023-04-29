@@ -26,6 +26,9 @@ public:
     void PrintarEmOrdem(No *node);
     void PrintarPosOrdem(No *node);
     double Resolver(No *node);
+    No* getRaiz() const{
+        return raiz;
+    }
 
 private:
     No *raiz;

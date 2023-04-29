@@ -30,23 +30,23 @@ void ArvoreExp::ConstruirArvore(std::string exp)
 
 double ArvoreExp::Resolver(No *node)
 {
-    if (node->left == nullptr && node->right == nullptr) {
+    if (node->esq == nullptr && node->dir == nullptr) {
         // O nó é um operando
-        return stod(node->value);
+        return std::stod(node->valor);
     } else {
         // O nó é um operador
-        double leftValue = evaluate(node->left);
-        double rightValue = evaluate(node->right);
-        if (node->value == "+") {
+        double leftValue = Resolver(node->esq);
+        double rightValue = Resolver(node->dir);
+        if (node->valor == "+") {
             return leftValue + rightValue;
-        } else if (node->value == "-") {
+        } else if (node->valor == "-") {
             return leftValue - rightValue;
-        } else if (node->value == "*") {
+        } else if (node->valor == "*") {
             return leftValue * rightValue;
-        } else if (node->value == "/") {
+        } else if (node->valor == "/") {
             return leftValue / rightValue;
         } else {
-            throw runtime_error("Operador inválido");
+            throw std::runtime_error("Operador inválido");
         }
     }
 }

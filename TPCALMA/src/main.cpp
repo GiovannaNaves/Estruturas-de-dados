@@ -66,18 +66,18 @@ int main(int argc, char *argv[])
         {
             std::cout << "OK I";
             break;
-            arvore.PrintarEmOrdem(arvore.raiz);
+            arvore.PrintarEmOrdem(arvore.getRaiz());
         }
         else if (line[0] == 'P')
         {
             std::cout << "OK P";
             break;
-            arvore.PrintarPosOrdem(arvore.raiz);
+            arvore.PrintarPosOrdem(arvore.getRaiz());
         }
         else if (line[0] == 'R')
         {
             std::cout << "OK R";
-            double resolvida = arvore.Resolver(arvore.raiz);
+            double resolvida = arvore.Resolver(arvore.getRaiz());
             std::cout << resolvida << std::endl;
             break;
         }

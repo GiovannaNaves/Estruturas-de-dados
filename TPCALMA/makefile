@@ -15,10 +15,7 @@ run:  $(EXE)
 	$(EXE) < entrada.txt
 
 $(BIN)/main: $(OBJS)
-	$(CC) -pg -o $(BIN)/main $(OBJS) $(LIBS)
-
-$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
+	$(CC)  -o $(BIN)/main $(OBJS) $(LIBS)
 
 $(OBJ)/pilha.o: $(HDRS) $(SRC)/pilha.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/pilha.o $(SRC)/pilha.cpp 
@@ -26,7 +23,7 @@ $(OBJ)/pilha.o: $(HDRS) $(SRC)/pilha.cpp
 $(OBJ)/funcoes.o: $(HDRS) $(SRC)/funcoes.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/funcoes.o $(SRC)/funcoes.cpp 
 
-$(OBJ)/arvore.o: $(HDRS) $(SRC)/arvore.cpp
+$(OBJ)/arvore.o: $(HDRS) $(SRC)/arvore.cpp 
 	$(CC) $(CFLAGS) -o $(OBJ)/arvore.o $(SRC)/arvore.cpp 
 
 clean:

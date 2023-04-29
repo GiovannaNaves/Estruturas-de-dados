@@ -1,5 +1,4 @@
-// implementação geral de uma pilha
-
+#pragma once
 template <typename T>
 class Pilha
 {
