@@ -1,7 +1,8 @@
-#pragma once
+#ifndef PILHA_H
+#define PILHA_H
+#include "arvore.hpp"
 template <typename T>
-class Pilha
-{
+class Pilha{
 public:
     Pilha();
 
@@ -15,11 +16,17 @@ public:
 
     void Limpa();
 
-    T Topo() { return topo; }
+    T Topo() { return itens[topo]; }
 
 protected:
     int tamanho;
-    T topo;
+    int topo;
     static const int MAXTAM = 100;
     T itens[MAXTAM];
 };
+
+template class Pilha<std::string>;
+template class Pilha<No*>;
+
+
+#endif

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <sstream>
+
 #include "arvore.hpp"
 #include "pilha.hpp"
 
@@ -9,14 +11,15 @@ bool isOperator(std::string c)
 
 void ArvoreExp::ConstruirArvore(std::string exp)
 {
-    Pilha<ArvoreExp::No *> p = Pilha<ArvoreExp::No *>();
+    Pilha<No *> p = Pilha<No *>();
 
-    for (auto e : exp)
-    {
-        std::string elemento(1, e);
-        ArvoreExp::No *no = new ArvoreExp::No(elemento);
+    std::stringstream ss(exp);
+    std::string token;
 
-        if (isOperator(elemento))
+    while (ss >> token) {
+        No *no = new No (token);
+
+        if (isOperator(token))
         {
             no->dir = p.Desempilha();
             no->esq = p.Desempilha();
@@ -25,7 +28,7 @@ void ArvoreExp::ConstruirArvore(std::string exp)
         p.Empilha(no);
     }
 
-    this->raiz = p.Pilha::Desempilha();
+    this->raiz = p.Desempilha();
 }
 
 double ArvoreExp::Resolver(No *node)

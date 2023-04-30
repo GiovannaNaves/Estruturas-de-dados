@@ -1,12 +1,8 @@
-// implementação geral de uma arvore
-#pragma once
-
+#ifndef ARVORE_H
+#define ARVORE_H
 #include <string>
 
-class ArvoreExp
-{
-public:
-    struct No
+struct No
     {
         std::string valor;
         No *esq;
@@ -15,9 +11,12 @@ public:
         // Constructor to initialize the member variables
         No(const std::string &valor, No *esq = nullptr, No *dir = nullptr)
             : valor(valor), esq(esq), dir(dir)
-        {
-        }
+        {}
     };
+    
+class ArvoreExp{
+public:
+
 
     ArvoreExp() {}
     ~ArvoreExp() {}
@@ -33,3 +32,6 @@ public:
 private:
     No *raiz;
 };
+
+
+#endif

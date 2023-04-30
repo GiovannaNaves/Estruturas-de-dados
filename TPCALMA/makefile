@@ -12,7 +12,7 @@ EXE = $(BIN)/main
 
 run:  $(EXE)
 	clear
-	$(EXE) < entrada.txt
+	$(EXE) entrada.txt
 
 $(BIN)/main: $(OBJS)
 	$(CC)  -o $(BIN)/main $(OBJS) $(LIBS)
@@ -25,6 +25,9 @@ $(OBJ)/funcoes.o: $(HDRS) $(SRC)/funcoes.cpp
 
 $(OBJ)/arvore.o: $(HDRS) $(SRC)/arvore.cpp 
 	$(CC) $(CFLAGS) -o $(OBJ)/arvore.o $(SRC)/arvore.cpp 
+
+$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp 
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

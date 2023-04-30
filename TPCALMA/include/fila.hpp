@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FILA_H
+#define FILA_H
 
 #include <string>
 
@@ -14,3 +15,5 @@ class Fila{
         
 
 }
+
+#endif

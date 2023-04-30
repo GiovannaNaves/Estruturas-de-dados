@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 
+#include "pilha.hpp"
 #include "arvore.hpp"
 #include "funcoes.hpp"
 
@@ -37,8 +38,6 @@ int main(int argc, char *argv[])
         if (line[0] == 'L')
         {
             std::cout << "OK L";
-            break;
-
             // Por padrao identificamos como pos
             std::string tipo = "pos";
 
@@ -61,22 +60,23 @@ int main(int argc, char *argv[])
 
             // Aqui temos a expressao como pós -> construir a arvore
             arvore.ConstruirArvore(exp);
+
         }
         else if (line[0] == 'I')
         {
-            std::cout << "OK I";
+            std::cout << "INFIXA : ";
             break;
             arvore.PrintarEmOrdem(arvore.getRaiz());
         }
         else if (line[0] == 'P')
         {
-            std::cout << "OK P";
+            std::cout << "POSFIXA: ";
             break;
             arvore.PrintarPosOrdem(arvore.getRaiz());
         }
         else if (line[0] == 'R')
         {
-            std::cout << "OK R";
+            std::cout << "VAL: ";
             double resolvida = arvore.Resolver(arvore.getRaiz());
             std::cout << resolvida << std::endl;
             break;

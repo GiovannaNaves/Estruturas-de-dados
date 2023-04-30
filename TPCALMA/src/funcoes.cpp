@@ -1,6 +1,7 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+
 #include "funcoes.hpp"
 #include "pilha.hpp"
 
@@ -23,7 +24,7 @@ int precedence(const std::string &op)
 // se LER: armazenar a exp
 std::string Funcoes::TransformaEmPosfixo(std::string infixo)
 {
-    Pilha<std::string> pilhaOp = Pilha<std::string>();
+    Pilha<std::string> pilhaOp;
     std::string posfixo_final;
     std::string elemento;
 
@@ -50,7 +51,8 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
         else
         {
             bool pilhaNaoVazia = !pilhaOp.Vazia();
-            bool topoNaoEhAbreParenteses = pilhaOp.Topo() != "(";
+            bool topoNaoEhAbreParenteses = pilhaOp.
+            Topo() != "(";
             bool precedenciaOk = precedence(elemento) <= precedence(pilhaOp.Topo());
 
             while (pilhaNaoVazia && topoNaoEhAbreParenteses && precedenciaOk)

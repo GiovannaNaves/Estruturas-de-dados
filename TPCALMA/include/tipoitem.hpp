@@ -1,4 +1,5 @@
-//implementação geral de um tipo item
+#ifndef TIPOITEM_H
+#define TIPOITEM_H
 
 typedef int TipoChave; // TipoChave é um inteiro
 
@@ -35,3 +36,5 @@ class TipoItem
         TipoChave chave;
         // outros membros
 };
+
+#endif

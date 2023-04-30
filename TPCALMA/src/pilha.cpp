@@ -1,3 +1,4 @@
+#include <iostream>
 #include "pilha.hpp"
 
 template <typename T>
@@ -8,10 +9,14 @@ Pilha<T>::Pilha()
 };
 
 template <typename T>
-int Pilha<T>::GetTamanho() { return this->tamanho; };
+int Pilha<T>::GetTamanho() { 
+    return this->tamanho; 
+};
 
 template <typename T>
-bool Pilha<T>::Vazia() { return this->tamanho == 0; };
+bool Pilha<T>::Vazia() { 
+    return this->tamanho == 0;
+};
 
 template <typename T>
 void Pilha<T>::Empilha(T item)
