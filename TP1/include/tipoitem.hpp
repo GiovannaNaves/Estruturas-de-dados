@@ -28,13 +28,12 @@ class TipoItem
 
         void TipoItem::Imprime()
         {
-            printf("%d ",chave);
+            std::cout << chave;
         }
 
 
     private:
         TipoChave chave;
-        // outros membros
 };
 
 #endif

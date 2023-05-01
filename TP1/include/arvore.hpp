@@ -8,29 +8,26 @@ struct No
         No *esq;
         No *dir;
 
-        // Constructor to initialize the member variables
+        // Construtor para iniciar as variaveis
         No(const std::string &valor, No *esq = nullptr, No *dir = nullptr)
             : valor(valor), esq(esq), dir(dir)
         {}
     };
     
 class ArvoreExp{
-public:
+    public:
 
+        ArvoreExp() {};
+        ~ArvoreExp() {};
 
-    ArvoreExp() {}
-    ~ArvoreExp() {}
+        void ConstruirArvore(std::string);
+        void PrintarEmOrdem(No *node);
+        void PrintarPosOrdem(No *node);
+        double Resolver(No *node);
+        No* getRaiz();
 
-    void ConstruirArvore(std::string);
-    void PrintarEmOrdem(No *node);
-    void PrintarPosOrdem(No *node);
-    double Resolver(No *node);
-    No* getRaiz() const{
-        return raiz;
-    }
-
-private:
-    No *raiz;
+    private:
+        No *raiz;
 };
 
 

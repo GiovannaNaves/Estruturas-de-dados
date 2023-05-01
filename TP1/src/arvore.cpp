@@ -39,16 +39,16 @@ double ArvoreExp::Resolver(No *node)
         return std::stod(node->valor);
     } else {
         // O nó é um operador
-        double leftValue = Resolver(node->esq);
-        double rightValue = Resolver(node->dir);
+        double valorEsq = Resolver(node->esq);
+        double valorDir = Resolver(node->dir);
         if (node->valor == "+") {
-            return leftValue + rightValue;
+            return valorEsq + valorDir;
         } else if (node->valor == "-") {
-            return leftValue - rightValue;
+            return valorEsq - valorDir;
         } else if (node->valor == "*") {
-            return leftValue * rightValue;
+            return valorEsq * valorDir;
         } else if (node->valor == "/") {
-            return leftValue / rightValue;
+            return valorEsq / valorDir;
         } else {
             throw std::runtime_error("Operador inválido");
         }
@@ -87,4 +87,8 @@ void ArvoreExp::PrintarEmOrdem(No *node)
     }
 
     std::cout << ") ";
+}
+
+No* ArvoreExp::getRaiz() {
+    return raiz;
 }

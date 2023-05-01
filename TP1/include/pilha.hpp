@@ -3,30 +3,29 @@
 #include "arvore.hpp"
 template <typename T>
 class Pilha{
-public:
-    Pilha();
+    public:
+        Pilha();
 
-    int GetTamanho();
+        int GetTamanho();
 
-    bool Vazia();
+        bool Vazia();
 
-    void Empilha(T item);
+        void Empilha(T item);
 
-    T Desempilha();
+        T Desempilha();
 
-    void Limpa();
+        void Limpa();
 
-    T Topo() { return itens[topo]; }
+        T Topo();
 
-protected:
-    int tamanho;
-    int topo;
-    static const int MAXTAM = 100;
-    T itens[MAXTAM];
+    protected:
+        int tamanho;
+        int topo;
+        static const int MAXTAM = 100;
+        T itens[MAXTAM];
 };
 
 template class Pilha<std::string>;
 template class Pilha<No*>;
-
 
 #endif

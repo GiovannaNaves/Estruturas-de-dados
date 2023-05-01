@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     // Se não der nome do arquivo -> erro
     if (argc < 2)
     {
-        std::cerr << "Error: Nenhum arquivo encontrado" << std::endl;
+        std::cerr << "Erro: Nenhum arquivo encontrado" << std::endl;
         return 1;
     }
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     // Checa se abriu
     if (!infile.is_open())
     {
-        std::cerr << "Error: could not open file " << filename << std::endl;
+        std::cout << "Erro: não foi possível abrir o arquivo" << filename << std::endl;
         return 1;
     }
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     ArvoreExp arvore = ArvoreExp();
     while (std::getline(infile, line))
     {
-
+        // lendo a primeira linha
         if (line[0] == 'L')
         {
             // Por padrao identificamos como pos
@@ -45,16 +45,14 @@ int main(int argc, char *argv[])
 
             std::istringstream iss(line);
             std::string token;
-
-            iss >> token; // LER
-            iss >> token; // POSFIXA OU INFIXA
+            iss >> token; // "LER"
+            iss >> token; // "POSFIXA" OU "INFIXA"
 
             std::getline(iss, exp);
             // Se houver um parenteses então é prefixo
             if (exp[0] == '(')
                 tipo = "pre";
 
-            
             // Se pre transforma em pos
             if (tipo == "pre")
             {
@@ -66,6 +64,8 @@ int main(int argc, char *argv[])
             arvore.ConstruirArvore(exp);
             // break; COLOQUEI ESSE BREAK AQUI PQ PARECE QUE ATÉ ANTES DE CHAMAR O CONSTRUIR ARVORE TUDO TA OK NO CASO POSFIXA. NA INFIXA O PROGRAMA RODA TODO.
         }
+
+        //lendo a segunda linha
         else if (line[0] == 'I')
         {
             std::cout << "INFIXA : ";
@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
         {
             std::cout << "POSFIXA: ";
             std::cout << exp << std::endl;
-            //arvore.PrintarPosOrdem(arvore.getRaiz());
+            //arvore.PrintarPosOrdem(arvore.getRaiz()); -> seria uma outra opção
         }
         else if (line[0] == 'R')
         {

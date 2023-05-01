@@ -5,7 +5,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/pilha.o $(OBJ)/funcoes.o $(OBJ)/arvore.o
-HDRS = $(INC)/arvore.hpp $(INC)/funcoes.hpp $(INC)/pilha.hpp $(INC)/tipoitem.hpp $(INC)/tipono.hpp
+HDRS = $(INC)/arvore.hpp $(INC)/funcoes.hpp $(INC)/pilha.hpp $(INC)/tipoitem.hpp
 CFLAGS = -Wall -c -I$(INC)
 
 EXE = $(BIN)/main

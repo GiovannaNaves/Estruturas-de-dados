@@ -50,3 +50,8 @@ void Pilha<T>::Limpa()
     this->topo = -1;
     this->tamanho = 0;
 };
+
+template <typename T>
+T Pilha<T>::Topo() { 
+    return itens[topo]; 
+};

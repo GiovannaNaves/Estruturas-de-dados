@@ -5,7 +5,7 @@
 #include "funcoes.hpp"
 #include "pilha.hpp"
 
-int precedence(const std::string &op)
+int precedencia(const std::string &op)
 {
     if (op == "*" || op == "/")
     {
@@ -52,7 +52,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
         {
             bool pilhaNaoVazia = !pilhaOp.Vazia();
             bool topoNaoEhAbreParenteses = pilhaOp.Topo() != "(";
-            bool precedenciaOk = precedence(elemento) <= precedence(pilhaOp.Topo());
+            bool precedenciaOk = precedencia(elemento) <= precedencia(pilhaOp.Topo());
 
             while (pilhaNaoVazia && topoNaoEhAbreParenteses && precedenciaOk)
             {
@@ -67,7 +67,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
                 }
                 else
                 {
-                    // throw std::invalid_argument("expressão inválida: parênteses não correspondentes");
+                    std::cout << "Expressão inválida: parênteses não correspondentes" << std::endl;
                 }
             }
             else
@@ -82,7 +82,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
     {
         if (pilhaOp.Topo() == "(")
         {
-            // throw std::invalid_argument("expressão inválida: parênteses não correspondentes");
+             std::cout << "Expressão inválida: parênteses não correspondentes" << std::endl;
         }
         // Adiciona operadores restantes à saída
         posfixo_final += pilhaOp.Desempilha();
