@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <string>
 
@@ -37,19 +38,23 @@ int main(int argc, char *argv[])
 
         if (line[0] == 'L')
         {
-            std::cout << "OK L";
             // Por padrao identificamos como pos
             std::string tipo = "pos";
 
-            // Posição do inicio da exp
-            int comeco_exp = line.find_first_not_of(" \t", 3);
+            std::string exp;
 
+            std::istringstream iss(line);
+            std::string token;
+
+            iss >> token; // LER
+            iss >> token; // POSFIXA OU INFIXA
+
+            std::getline(iss, exp);
             // Se houver um parenteses então é prefixo
-            if (line[comeco_exp] == '(')
+            if (exp[0] == '(')
                 tipo = "pre";
 
-            // Guarda a expressao
-            exp = line.substr(comeco_exp);
+            
 
             // Se pre transforma em pos
             if (tipo == "pre")
@@ -57,29 +62,26 @@ int main(int argc, char *argv[])
                 Funcoes exp_nova;
                 exp = exp_nova.TransformaEmPosfixo(exp);
             }
-
             // Aqui temos a expressao como pós -> construir a arvore
             arvore.ConstruirArvore(exp);
-
         }
         else if (line[0] == 'I')
         {
             std::cout << "INFIXA : ";
-            break;
             arvore.PrintarEmOrdem(arvore.getRaiz());
+            std::cout << std::endl ;
         }
         else if (line[0] == 'P')
         {
             std::cout << "POSFIXA: ";
-            break;
-            arvore.PrintarPosOrdem(arvore.getRaiz());
+            std::cout << exp << std::endl;
+            //arvore.PrintarPosOrdem(arvore.getRaiz());
         }
         else if (line[0] == 'R')
         {
             std::cout << "VAL: ";
             double resolvida = arvore.Resolver(arvore.getRaiz());
             std::cout << resolvida << std::endl;
-            break;
         }
     }
 
