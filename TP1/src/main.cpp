@@ -55,7 +55,6 @@ int main(int argc, char *argv[])
                 tipo = "pre";
 
             
-
             // Se pre transforma em pos
             if (tipo == "pre")
             {

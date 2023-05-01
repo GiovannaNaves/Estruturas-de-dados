@@ -15,7 +15,7 @@ run:  $(EXE)
 	$(EXE) entrada.txt
 
 $(BIN)/main: $(OBJS)
-	$(CC)  -o $(BIN)/main $(OBJS) $(LIBS)
+	$(CC) -o $(BIN)/main $(OBJS) $(LIBS)
 
 $(OBJ)/pilha.o: $(HDRS) $(SRC)/pilha.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/pilha.o $(SRC)/pilha.cpp 

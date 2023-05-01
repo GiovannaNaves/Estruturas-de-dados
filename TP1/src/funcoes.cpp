@@ -31,17 +31,17 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
     std::istringstream iss(infixo);
     while (iss >> elemento)
     {
-        if (std::isspace(static_cast<unsigned char>(elemento[0])))
+        if (std::isspace(elemento[0]))
         {
             // pula espaços em branco
             continue;
         }
-        else if (std::isdigit(static_cast<unsigned char>(elemento[0])))
+        else if (std::isdigit(elemento[0]))
         { // ver se funciona
             std::string numero_atual;
             numero_atual += elemento;
 
-            while (iss >> elemento && !std::isspace(static_cast<unsigned char>(elemento[0])))
+            while (iss >> elemento && !std::isspace(elemento[0]))
             {
                 numero_atual += elemento;
             }
@@ -51,8 +51,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
         else
         {
             bool pilhaNaoVazia = !pilhaOp.Vazia();
-            bool topoNaoEhAbreParenteses = pilhaOp.
-            Topo() != "(";
+            bool topoNaoEhAbreParenteses = pilhaOp.Topo() != "(";
             bool precedenciaOk = precedence(elemento) <= precedence(pilhaOp.Topo());
 
             while (pilhaNaoVazia && topoNaoEhAbreParenteses && precedenciaOk)
