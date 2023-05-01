@@ -59,7 +59,6 @@ int main(int argc, char *argv[])
                 Funcoes exp_nova;
                 exp = exp_nova.TransformaEmPosfixo(exp);
             }
-
             // Aqui temos a expressao como pós -> construir a arvore
             arvore.ConstruirArvore(exp);
         }

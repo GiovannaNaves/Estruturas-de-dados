@@ -15,9 +15,11 @@ void ArvoreExp::ConstruirArvore(std::string exp)
 
     std::stringstream ss(exp);
     std::string token;
-    while (ss >> token) {
+    while (ss >> token)
+    {
         No *no = new No(token);
-        if (no == nullptr) {
+        if (no == nullptr)
+        {
             std::cout << "Falha na alocacao de memoria para No." << std::endl;
         }
         if (isOperator(token))
@@ -34,22 +36,34 @@ void ArvoreExp::ConstruirArvore(std::string exp)
 
 double ArvoreExp::Resolver(No *node)
 {
-    if (node->esq == nullptr && node->dir == nullptr) {
+    if (node->esq == nullptr && node->dir == nullptr)
+    {
         // O nó é um operando
         return std::stod(node->valor);
-    } else {
+    }
+    else
+    {
         // O nó é um operador
         double valorEsq = Resolver(node->esq);
         double valorDir = Resolver(node->dir);
-        if (node->valor == "+") {
+        if (node->valor == "+")
+        {
             return valorEsq + valorDir;
-        } else if (node->valor == "-") {
+        }
+        else if (node->valor == "-")
+        {
             return valorEsq - valorDir;
-        } else if (node->valor == "*") {
+        }
+        else if (node->valor == "*")
+        {
             return valorEsq * valorDir;
-        } else if (node->valor == "/") {
+        }
+        else if (node->valor == "/")
+        {
             return valorEsq / valorDir;
-        } else {
+        }
+        else
+        {
             std::cout << "Operador inválido" << std::endl;
         }
     }
@@ -57,38 +71,26 @@ double ArvoreExp::Resolver(No *node)
 
 void ArvoreExp::PrintarPosOrdem(No *node)
 {
-    if (node->esq != NULL)
-    {
-        return PrintarPosOrdem(node->esq);
+    if(node != NULL){
+        PrintarPosOrdem(node->esq);
+        PrintarPosOrdem(node->dir);
+        std::cout << node->valor << " ";  
     }
-
-    if (node->dir != NULL)
-    {
-        return PrintarPosOrdem(node->dir);
-    }
-
-    std::cout << node->valor << " ";
 }
 
 void ArvoreExp::PrintarEmOrdem(No *node)
 {
 
-    if (node->esq != NULL)
-    {
-        return PrintarEmOrdem(node->esq);
+    if(node != NULL) {
+        std::cout << "( ";
+        PrintarEmOrdem(node->esq);
+        std::cout << node->valor << " ";
+        PrintarEmOrdem(node->dir);
+        std::cout << ") ";
     }
-    std::cout << "( ";
-
-    std::cout << node->valor << " ";
-
-    if (node->dir != NULL)
-    {
-        return PrintarEmOrdem(node->dir);
-    }
-
-    std::cout << ") ";
 }
 
-No* ArvoreExp::getRaiz() {
+No *ArvoreExp::getRaiz()
+{
     return raiz;
 }

@@ -7,7 +7,8 @@
 
 int precedencia(const std::string &op)
 {
-    if (op == "(") {
+    if (op == "(")
+    {
         return 3;
     }
     else if (op == "*" || op == "/")
@@ -40,9 +41,10 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
             // pula espaços em branco
             continue;
         }
-        else if (elemento == "INFIXA")
+        else if (elemento == "INFIXA" || elemento == "POSFIXA")
         {
             // pula a flag de infixa
+            std::cout << "ué" << std::endl;
             continue;
         }
         else if (std::isdigit(elemento[0]))
