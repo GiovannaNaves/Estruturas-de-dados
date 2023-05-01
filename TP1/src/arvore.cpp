@@ -50,7 +50,7 @@ double ArvoreExp::Resolver(No *node)
         } else if (node->valor == "/") {
             return valorEsq / valorDir;
         } else {
-            throw std::runtime_error("Operador inválido");
+            std::cout << "Operador inválido" << std::endl;
         }
     }
 }

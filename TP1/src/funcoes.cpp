@@ -7,7 +7,10 @@
 
 int precedencia(const std::string &op)
 {
-    if (op == "*" || op == "/")
+    if (op == "(") {
+        return 3;
+    }
+    else if (op == "*" || op == "/")
     {
         return 2;
     }
@@ -29,6 +32,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
     std::string elemento;
 
     std::istringstream iss(infixo);
+
     while (iss >> elemento)
     {
         if (std::isspace(elemento[0]))
@@ -36,29 +40,25 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
             // pula espaços em branco
             continue;
         }
+        else if (elemento == "INFIXA")
+        {
+            // pula a flag de infixa
+            continue;
+        }
         else if (std::isdigit(elemento[0]))
-        { // ver se funciona
+        {
             std::string numero_atual;
             numero_atual += elemento;
-
-            while (iss >> elemento && !std::isspace(elemento[0]))
-            {
-                numero_atual += elemento;
-            }
-
             posfixo_final += numero_atual + " ";
         }
         else
         {
-            bool pilhaNaoVazia = !pilhaOp.Vazia();
-            bool topoNaoEhAbreParenteses = pilhaOp.Topo() != "(";
-            bool precedenciaOk = precedencia(elemento) <= precedencia(pilhaOp.Topo());
-
-            while (pilhaNaoVazia && topoNaoEhAbreParenteses && precedenciaOk)
+            while (!pilhaOp.Vazia() && pilhaOp.Topo() != "(" && precedencia(elemento) <= precedencia(pilhaOp.Topo()))
             {
                 // adiciona operador à saída
                 posfixo_final += pilhaOp.Desempilha() + " ";
             }
+
             if (elemento == ")")
             {
                 if (!pilhaOp.Vazia() && pilhaOp.Topo() == "(")
@@ -82,7 +82,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
     {
         if (pilhaOp.Topo() == "(")
         {
-             std::cout << "Expressão inválida: parênteses não correspondentes" << std::endl;
+            std::cout << "Expressão inválida: parênteses não correspondentes ELE TA AQUI" << std::endl;
         }
         // Adiciona operadores restantes à saída
         posfixo_final += pilhaOp.Desempilha();

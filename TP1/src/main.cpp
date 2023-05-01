@@ -40,21 +40,21 @@ int main(int argc, char *argv[])
         {
             // Por padrao identificamos como pos
             std::string tipo = "pos";
+            exp = "";
 
-            std::string exp;
-
+            // Lendo a primeira linha
             std::istringstream iss(line);
             std::string token;
-            iss >> token; // "LER"
-            iss >> token; // "POSFIXA" OU "INFIXA"
-
+            iss >> token; // 'LER' token
+            iss >> token; // 'INFIXA'/'POSFIXA' token
             std::getline(iss, exp);
+
             // Se houver um parenteses então é prefixo
-            if (exp[0] == '(')
-                tipo = "pre";
+            if (exp.find("(") != std::string::npos && token == "INFIXA")
+                tipo = "infixa";
 
             // Se pre transforma em pos
-            if (tipo == "pre")
+            if (tipo == "infixa")
             {
                 Funcoes exp_nova;
                 exp = exp_nova.TransformaEmPosfixo(exp);
