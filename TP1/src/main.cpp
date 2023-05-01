@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
         if (line[0] == 'L')
         {
             // Por padrao identificamos como pos
-            std::string tipo = "pos";
+            std::string tipo = "POSFIXA";
             exp = "";
 
             // Lendo a primeira linha
@@ -50,11 +50,18 @@ int main(int argc, char *argv[])
             std::getline(iss, exp);
 
             // Se houver um parenteses então é prefixo
-            if (exp.find("(") != std::string::npos && token == "INFIXA")
-                tipo = "infixa";
+            if (exp.find("(")){
+                tipo = "INFIXA";
+                
+            }
+       
+            if (tipo != token){
+                std::cout << "Expressão inválida: tipo da expressão não correspondente." << std::endl;
+                break;
+            }           
 
             // Se pre transforma em pos
-            if (tipo == "infixa")
+            if (tipo == "INFIXA")
             {
                 Funcoes exp_nova;
                 exp = exp_nova.TransformaEmPosfixo(exp);
