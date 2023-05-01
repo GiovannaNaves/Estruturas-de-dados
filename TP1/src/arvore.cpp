@@ -72,12 +72,12 @@ void ArvoreExp::PrintarPosOrdem(No *node)
 
 void ArvoreExp::PrintarEmOrdem(No *node)
 {
-    std::cout << "( ";
 
     if (node->esq != NULL)
     {
         return PrintarEmOrdem(node->esq);
     }
+    std::cout << "( ";
 
     std::cout << node->valor << " ";
 
