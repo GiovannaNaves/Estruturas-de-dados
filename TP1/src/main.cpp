@@ -61,8 +61,10 @@ int main(int argc, char *argv[])
                 Funcoes exp_nova;
                 exp = exp_nova.TransformaEmPosfixo(exp);
             }
+
             // Aqui temos a expressao como pós -> construir a arvore
             arvore.ConstruirArvore(exp);
+            // break; COLOQUEI ESSE BREAK AQUI PQ PARECE QUE ATÉ ANTES DE CHAMAR O CONSTRUIR ARVORE TUDO TA OK NO CASO POSFIXA. NA INFIXA O PROGRAMA RODA TODO.
         }
         else if (line[0] == 'I')
         {

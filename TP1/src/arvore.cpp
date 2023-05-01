@@ -15,10 +15,11 @@ void ArvoreExp::ConstruirArvore(std::string exp)
 
     std::stringstream ss(exp);
     std::string token;
-
     while (ss >> token) {
-        No *no = new No (token);
-
+        No *no = new No(token);
+        if (no == nullptr) {
+            std::cout << "Falha na alocacao de memoria para No." << std::endl;
+        }
         if (isOperator(token))
         {
             no->dir = p.Desempilha();
