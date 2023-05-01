@@ -6,16 +6,20 @@ INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o $(OBJ)/pilha.o $(OBJ)/funcoes.o $(OBJ)/arvore.o
 HDRS = $(INC)/arvore.hpp $(INC)/funcoes.hpp $(INC)/pilha.hpp
-CFLAGS = -Wall -c -I$(INC)
+CFLAGS = -Wall -c -I$(INC) -pg
 
 EXE = $(BIN)/main
+
+gprof: $(EXE)
+	$(EXE) entrada.txt
+	gprof -p $(EXE) gmon.out > /tmp/testegprof.txt
 
 run:  $(EXE)
 	clear
 	$(EXE) entrada.txt
 
 $(BIN)/main: $(OBJS)
-	$(CC) -o $(BIN)/main $(OBJS) $(LIBS)
+	$(CC) -o $(BIN)/main $(OBJS) $(LIBS) -pg
 
 $(OBJ)/pilha.o: $(HDRS) $(SRC)/pilha.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/pilha.o $(SRC)/pilha.cpp 

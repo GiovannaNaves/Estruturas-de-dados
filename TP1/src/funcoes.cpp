@@ -69,7 +69,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
                 }
                 else
                 {
-                    std::cout << "Expressão inválida: parênteses não correspondentes" << std::endl;
+                    std::cout << "Expressão não válida: parênteses não correspondentes" << std::endl;
                 }
             }
             else
@@ -84,7 +84,7 @@ std::string Funcoes::TransformaEmPosfixo(std::string infixo)
     {
         if (pilhaOp.Topo() == "(")
         {
-            std::cout << "Expressão inválida: parênteses não correspondentes ELE TA AQUI" << std::endl;
+            std::cout << "Expressão não válida: parênteses não correspondentes" << std::endl;
         }
         // Adiciona operadores restantes à saída
         posfixo_final += pilhaOp.Desempilha();

@@ -49,17 +49,20 @@ int main(int argc, char *argv[])
             iss >> token; // 'INFIXA'/'POSFIXA' token
             std::getline(iss, exp);
 
-            // Se houver um parenteses então é prefixo
-            if (exp.find("(")){
+            //std::cout << tipo << std::endl; //DEBUG
+
+            // Se houver um parenteses então é infixa
+            if (exp.find("(") && exp.find(")")){
                 tipo = "INFIXA";
-                
             }
-       
-            if (tipo != token){
+
+           /* if (tipo != token)
+            {
                 std::cout << "Expressão inválida: tipo da expressão não correspondente." << std::endl;
                 break;
-            }           
-
+            }
+            */
+           
             // Se pre transforma em pos
             if (tipo == "INFIXA")
             {
@@ -70,18 +73,18 @@ int main(int argc, char *argv[])
             arvore.ConstruirArvore(exp);
         }
 
-        //lendo a segunda linha
+        // lendo a segunda linha
         else if (line[0] == 'I')
         {
             std::cout << "INFIXA : ";
             arvore.PrintarEmOrdem(arvore.getRaiz());
-            std::cout << std::endl ;
+            std::cout << std::endl;
         }
         else if (line[0] == 'P')
         {
             std::cout << "POSFIXA: ";
             std::cout << exp << std::endl;
-            //arvore.PrintarPosOrdem(arvore.getRaiz()); -> seria uma outra opção
+            // arvore.PrintarPosOrdem(arvore.getRaiz()); -> seria uma outra opção
         }
         else if (line[0] == 'R')
         {
