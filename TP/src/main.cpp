@@ -1,7 +1,6 @@
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <string>
+#include <bits/stdc++.h>
+#include <sys/time.h>
+#include <sys/resource.h>
 
 #include "pilha.hpp"
 #include "arvore.hpp"
@@ -9,6 +8,7 @@
 
 int main(int argc, char *argv[])
 {
+    
     // Se não der nome do arquivo -> erro
     if (argc < 2)
     {
@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     std::string line;
     std::string exp;
     ArvoreExp arvore = ArvoreExp();
+
     while (std::getline(infile, line))
     {
         // lendo a primeira linha
@@ -49,19 +50,18 @@ int main(int argc, char *argv[])
             iss >> token; // 'INFIXA'/'POSFIXA' token
             std::getline(iss, exp);
 
-            //std::cout << tipo << std::endl; //DEBUG
-
             // Se houver um parenteses então é infixa
-            if (exp.find("(") && exp.find(")")){
+
+            if (exp.find("(") != std::string::npos){
                 tipo = "INFIXA";
             }
 
-           /* if (tipo != token)
+            if (tipo != token)
             {
                 std::cout << "Expressão inválida: tipo da expressão não correspondente." << std::endl;
                 break;
             }
-            */
+            
            
             // Se pre transforma em pos
             if (tipo == "INFIXA")

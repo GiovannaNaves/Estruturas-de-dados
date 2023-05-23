@@ -1,0 +1,8 @@
+Aula 6
+
+Giovanna Naves Ribeiro
+Matrícula: 2022043647
+
+O programa escolhido para a análise foi o multiplicador de matrizes utilizado na Aula 1 da disciplina de Estruturas de Dados.
+Nele, existem algumas funções como a soma e a multiplicação de matrizes, que utilizam 2 ou 3 loops aninhados ("for") e acessam o elemento da matriz cujos índices são indicados pelos loops.
+Portanto, existe um caminhamento nos índices que faz com que o programa acesse sempre o elemento referente ao próximo índice que, idealmente, se encontra muito próximo na memória ao elemento de índice anterior, acessando, dessa forma, espaços na memória próximos uns aos outros. Logo, pensando na Localidade De Referência Espacial, o código é ideal. 
