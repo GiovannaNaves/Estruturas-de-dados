@@ -1,17 +1,23 @@
+//---------------------------------------------------------------------
+// Arquivo	: mat.c
+// Conteudo	: implementacao do TAD MAT 
+// Autor	: Wagner Meira Jr. (meira@dcc.ufmg.br)
+// Historico	: 2021-10-18 - arquivo criado
+//		: 2021-10-21 - estrutura de diretorios
+//              : 2021-11-14 - adequacao para versao 1.1 memlog
+//---------------------------------------------------------------------
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <string.h>
-#include <getopt.h>
 #include "mat.h"
+#include "memlog.h"
 #include "msgassert.h"
 
 // limite superior da inicializacao aleatoria
 #define INITRANDOMRANGE 10
 // Macro que realiza swap sem variavel auxiliar
 #define ELEMSWAP(x,y) (x+=y,y=x-y,x-=y)
-
 
 void criaMatriz(mat_tipo * mat, int tx, int ty, int id)
 // Descricao: cria matriz com dimensoes tx X ty
@@ -41,6 +47,7 @@ void inicializaMatrizNula(mat_tipo * mat)
   for (i=0; i<MAXTAM; i++){
     for(j=0; j<MAXTAM; j++){
       mat->m[i][j] = 0;
+      ESCREVEMEMLOG((long int)(&(mat->m[i][j])),sizeof(double),mat->id);
     }
   }
 }
@@ -57,6 +64,7 @@ void inicializaMatrizAleatoria(mat_tipo * mat)
   for (i=0; i<mat->tamx; i++){
     for(j=0; j<mat->tamy; j++){
       mat->m[i][j] = drand48()*INITRANDOMRANGE;
+      ESCREVEMEMLOG((long int)(&(mat->m[i][j])),sizeof(double),mat->id);
     }
   }
 }
@@ -72,6 +80,7 @@ double acessaMatriz(mat_tipo * mat)
     for(j=0; j<mat->tamy; j++){
       aux = mat->m[i][j];
       s+=aux;
+      LEMEMLOG((long int)(&(mat->m[i][j])),sizeof(double),mat->id);
     }
   }
   return s; // apenas para evitar que acesso seja eliminado
@@ -99,6 +108,7 @@ void imprimeMatriz(mat_tipo * mat)
     printf("%8d ",i);
     for(j=0; j<mat->tamy; j++){
       printf("%8.2f ",mat->m[i][j]);
+      LEMEMLOG((long int)(&(mat->m[i][j])),sizeof(double),mat->id);
     }
     printf("\n");
   }
@@ -120,6 +130,7 @@ void salvaMatriz(mat_tipo * mat, FILE * out)
   for (i=0; i<mat->tamx; i++){
     for(j=0; j<mat->tamy; j++){
       fprintf(out, "%.6f ",mat->m[i][j]);
+      LEMEMLOG((long int)(&(mat->m[i][j])),sizeof(double),mat->id);
     }
     fprintf(out,"\n");
   }
@@ -135,6 +146,7 @@ void escreveElemento(mat_tipo * mat, int x, int y, double v)
   erroAssert((y<0)||(y>=mat->tamy),"Indice invalido");
 
   mat->m[x][y] = v;
+  ESCREVEMEMLOG((long int)(&(mat->m[x][y])),sizeof(double),mat->id);
 }
 
 double leElemento (mat_tipo * mat, int x, int y)
@@ -146,6 +158,7 @@ double leElemento (mat_tipo * mat, int x, int y)
   erroAssert((x<0)||(x>=mat->tamx),"Indice invalido");
   erroAssert((y<0)||(y>=mat->tamy),"Indice invalido");
 
+  LEMEMLOG((long int)(&(mat->m[x][y])),sizeof(double),mat->id);
   return mat->m[x][y];
 }
 
@@ -164,6 +177,8 @@ void copiaMatriz(mat_tipo *src, mat_tipo * dst, int dst_id)
   for (i=0; i<src->tamx; i++){
     for(j=0; j<src->tamy; j++){
       dst->m[i][j] = src->m[i][j];
+      LEMEMLOG((long int)(&(src->m[i][j])),sizeof(double),src->id);
+      ESCREVEMEMLOG((long int)(&(dst->m[i][j])),sizeof(double),dst->id);
     }
   }
 }
@@ -186,6 +201,9 @@ void somaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c)
   for (i=0; i<a->tamx; i++){
     for(j=0; j<a->tamy; j++){
       c->m[i][j] = a->m[i][j]+b->m[i][j];
+      LEMEMLOG((long int)(&(a->m[i][j])),sizeof(double),a->id);
+      LEMEMLOG((long int)(&(b->m[i][j])),sizeof(double),b->id);
+      ESCREVEMEMLOG((long int)(&(c->m[i][j])),sizeof(double),c->id);
     }
   }
 }
@@ -208,6 +226,9 @@ void multiplicaMatrizes(mat_tipo *a, mat_tipo *b, mat_tipo *c)
     for (j=0; j<c->tamy;j++){
       for (k=0; k<a->tamy;k++){
         c->m[i][j] += a->m[i][k]*b->m[k][j];
+        LEMEMLOG((long int)(&(a->m[i][k])),sizeof(double),a->id);
+        LEMEMLOG((long int)(&(b->m[k][j])),sizeof(double),b->id);
+        ESCREVEMEMLOG((long int)(&(c->m[i][j])),sizeof(double),c->id);
       }
     }
   }
@@ -227,6 +248,8 @@ void transpoeMatriz(mat_tipo *a)
   for (i=0; i<dim; i++){
     for(j=i+1; j<dim; j++){
       ELEMSWAP((a->m[i][j]),(a->m[j][i]));
+      ESCREVEMEMLOG((long int)(&(a->m[i][j])),sizeof(double),a->id);
+      ESCREVEMEMLOG((long int)(&(a->m[j][i])),sizeof(double),a->id);
     }
   }
   // inverte as dimensoes da matriz transposta
