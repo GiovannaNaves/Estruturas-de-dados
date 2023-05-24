@@ -1,0 +1,5 @@
+Processador: Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz   2.30 GHz
+RAM instalada: 8,00 GB (utilizável: 7,79 GB)
+Tipo de sistema	Sistema operacional de 64 bits, processador baseado em x64
+SO: Ubuntu 22.04.1 LTS
+Compilador: gcc
