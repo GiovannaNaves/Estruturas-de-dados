@@ -8,6 +8,8 @@ typedef struct {
     int y;
 } Point;
 
+Point points[100]; 
+
 // Função para ler os pontos a partir de um arquivo
 int readPointsFromFile(const char* filename, Point** points) {
     FILE* file = fopen(filename, "r");
@@ -168,6 +170,21 @@ void countingSort(Point* points, int numPoints) {
     free(count);
     free(output);
 }
+
+// Function to compare two points for sorting
+int compare(const void* a, const void* b) {
+    Point* p1 = (Point*)a;
+    Point* p2 = (Point*)b;
+    int orientation = crossProduct(points[0], *p1, *p2);
+    if (orientation == 0) {
+        // If points are collinear, compare based on distance from the anchor point
+        int dist1 = (p1->x - points[0].x) * (p1->x - points[0].x) + (p1->y - points[0].y) * (p1->y - points[0].y);
+        int dist2 = (p2->x - points[0].x) * (p2->x - points[0].x) + (p2->y - points[0].y) * (p2->y - points[0].y);
+        return dist1 - dist2;
+    }
+    return orientation;
+}
+
 
 // Algoritmo de fecho convexo - Graham Scan
 int grahamScan(Point* points, int numPoints, Point** convexHull) {
