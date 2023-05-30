@@ -1,13 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "memlog.h"
 
 #define W (8) //largura do tabuleiro
-
 typedef struct mat{
-	int tabuleiro[W][W];
-	int tamx, tamy;
-	int id;
+    int tabuleiro[W][W];
+    int tamx, tamy;
+    int id;
 } mat_tipo;
+
+mat_tipo *m;
+
+void init(){
+    m = malloc(sizeof(mat_tipo));
+    m->id = 1;
+    m->tamx = W;
+    m->tamy = W;
+}
 
 int mat[W][W];
 
@@ -79,7 +88,7 @@ void ProxMov(int mat[][W], int x, int y, int contador, int *v, int *r){
     int min_pref_indice = 0;
     int min_pref2_indice = 0;
 
-    m->tabuleiro[x][y] = pos_cavalo;
+    m->tabuleiro[x][y] = contador;
     ESCREVEMEMLOG((long int)(&(m->tabuleiro[x][y])),sizeof(double),m->id);
     
     if(contador == (W*W)){
@@ -111,17 +120,17 @@ void ProxMov(int mat[][W], int x, int y, int contador, int *v, int *r){
     prox_y = y + MovsPossiveis[min_pref_indice][1];
     ++contador;
     ++*v;
-    ProxMov(mat, prox_x, prox_y, contador, v, r);
+    ProxMov(m->tabuleiro, prox_x, prox_y, contador, v, r);
 
 }
 
 void passeio(int x, int y){
+    init();
     x--;
     y--;
     int v=1;
     int r=0;
-    mat_tipo *m;
-    ProxMov(tabuleiro, x, y, 1, &v, &r);
+    ProxMov(mat, x, y, 1, &v, &r);
 
     //imprimindo a matriz resultante no arquivo
     FILE * fPtr;
