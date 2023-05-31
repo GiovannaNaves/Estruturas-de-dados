@@ -215,7 +215,7 @@ int grahamScan(Point* points, int numPoints, Point** convexHull, int sortType) {
 
     // Ordenar os pontos pelo ângulo polar em relação ao ponto mínimo
     if(sortType == 1)
-        mergeSort(&points[1], numPoints - 1);
+        mergeSort(&points[1], 0, numPoints - 1);
     if(sortType == 2)
         insertionSort(&points[1], numPoints - 1);
     if(sortType == 3)
