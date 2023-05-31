@@ -17,8 +17,8 @@ run:  $(EXE)
 $(BIN)/main: $(OBJS)
 	$(CC) -o $(BIN)/main $(OBJS) $(LIBS) -pg
 
-$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp 
-	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
+$(OBJ)/main.o: $(HDRS) $(SRC)/main2.cpp 
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main2.cpp 
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
