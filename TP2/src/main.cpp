@@ -187,7 +187,7 @@ int compare(const void* a, const void* b) {
 
 
 // Algoritmo de fecho convexo - Graham Scan
-int grahamScan(Point* points, int numPoints, Point** convexHull) {
+int grahamScan(Point* points, int numPoints, Point** convexHull, int sortType) {
     if (numPoints < 3) {
         return 0;
     }
@@ -214,7 +214,12 @@ int grahamScan(Point* points, int numPoints, Point** convexHull) {
     points[minYIndex] = temp;
 
     // Ordenar os pontos pelo ângulo polar em relação ao ponto mínimo
-    qsort(&points[1], numPoints - 1, sizeof(Point), compare);
+    if(sortType == 1)
+        mergeSort(&points[1], numPoints - 1);
+    if(sortType == 2)
+        insertionSort(&points[1], numPoints - 1);
+    if(sortType == 3)
+        countingSort(&points[1], numPoints - 1);
 
     // Remover pontos colineares
     int m = 1;
@@ -315,8 +320,7 @@ int main(int argc, char* argv[]) {
 
     // Graham Scan com MergeSort
     start = clock();
-    mergeSort(points, 0, numPoints - 1);
-    int numConvexHullPointsGrahamMergeSort = grahamScan(points, numPoints, &convexHull);
+    int numConvexHullPointsGrahamMergeSort = grahamScan(points, numPoints, &convexHull, 1);
     end = clock();
     timeElapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
     printConvexHull(convexHull, numConvexHullPointsGrahamMergeSort);
@@ -324,8 +328,7 @@ int main(int argc, char* argv[]) {
 
     // Graham Scan com InsertionSort
     start = clock();
-    insertionSort(points, numPoints);
-    int numConvexHullPointsGrahamInsertionSort = grahamScan(points, numPoints, &convexHull);
+    int numConvexHullPointsGrahamInsertionSort = grahamScan(points, numPoints, &convexHull, 2);
     end = clock();
     timeElapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
     printConvexHull(convexHull, numConvexHullPointsGrahamInsertionSort);
@@ -333,39 +336,19 @@ int main(int argc, char* argv[]) {
 
     // Graham Scan com CountingSort
     start = clock();
-    countingSort(points, numPoints);
-    int numConvexHullPointsGrahamCountingSort = grahamScan(points, numPoints, &convexHull);
+    int numConvexHullPointsGrahamCountingSort = grahamScan(points, numPoints, &convexHull, 3);
     end = clock();
     timeElapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
     printConvexHull(convexHull, numConvexHullPointsGrahamCountingSort);
     printf("GRAHAM+COUNTINGSORT: %.3fs\n", timeElapsed);
 
-    // Jarvis March com MergeSort
+    // Jarvis March
     start = clock();
-    mergeSort(points, 0, numPoints - 1);
     int numConvexHullPointsJarvisMergeSort = jarvisMarch(points, numPoints, &convexHull);
     end = clock();
     timeElapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
     printConvexHull(convexHull, numConvexHullPointsJarvisMergeSort);
     printf("JARVIS+MERGESORT: %.3fs\n", timeElapsed);
-
-    // Jarvis March com InsertionSort
-    start = clock();
-    insertionSort(points, numPoints);
-    int numConvexHullPointsJarvisInsertionSort = jarvisMarch(points, numPoints, &convexHull);
-    end = clock();
-    timeElapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printConvexHull(convexHull, numConvexHullPointsJarvisInsertionSort);
-    printf("JARVIS+INSERTIONSORT: %.3fs\n", timeElapsed);
-
-    // Jarvis March com CountingSort
-    start = clock();
-    countingSort(points, numPoints);
-    int numConvexHullPointsJarvisCountingSort = jarvisMarch(points, numPoints, &convexHull);
-    end = clock();
-    timeElapsed = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printConvexHull(convexHull, numConvexHullPointsJarvisCountingSort);
-    printf("JARVIS+COUNTINGSORT: %.3fs\n", timeElapsed);
 
     // Liberar a memória alocada para os pontos
     free(points);
