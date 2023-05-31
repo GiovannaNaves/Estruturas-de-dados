@@ -1,4 +1,4 @@
-CC = gcc
+CC = g++
 LIBS = -lm
 SRC = src
 OBJ = obj
@@ -11,7 +11,6 @@ CFLAGS = -Wall -c -I$(INC) -pg
 EXE = $(BIN)/main
 
 run:  $(EXE)
-	clear
 	$(EXE) pontos.txt
 
 $(BIN)/main: $(OBJS)
