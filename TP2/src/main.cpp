@@ -4,10 +4,10 @@
 #include <sstream>
 #include <time.h>
 
+using namespace std;
+
 #include "convexhull.hpp"
 #include "point.hpp"
-
-using namespace std;
 
 Point points[100];
 
