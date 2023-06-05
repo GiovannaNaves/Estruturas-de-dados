@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-// #include <time.h>
 #include <sys/time.h>
 #include <sys/resource.h>
 
@@ -34,7 +33,7 @@ int main(int argc, char *argv[])
 
     // Executar os algoritmos de fecho convexo com os diferentes métodos de ordenação
     Point *convexHull;
-    clock_t start, end; // startj, endj, startgi, endgi, startgm, endgm, startgb, endgb;
+    clock_t start, end; 
     struct rusage graham_start, graham_end, jarvis_start, jarvis_end;
     struct timespec graham_start_clock, graham_end_clock, jarvis_start_clock, jarvis_end_clock;
     double timeElapsed[4];
@@ -54,24 +53,7 @@ int main(int argc, char *argv[])
         clock_gettime(CLOCK_MONOTONIC, &graham_end_clock);
 
         timeElapsed[i - 1] = (graham_end_clock.tv_sec - graham_start_clock.tv_sec) + (graham_end_clock.tv_nsec - graham_start_clock.tv_nsec) / 10e9;
-        // timeElapsed[i - 1] = ((double)(end - start)) / CLOCKS_PER_SEC;
     }
-
-    // // Graham Scan com InsertionSort
-    // startgi = clock();
-    // int numConvexHullPointsGrahamInsertionSort = grahamScan(points, numPoints, &convexHull, 2);
-    // endgi = clock();
-    // timeElapsed = ((double)(endgi - startgi)) / CLOCKS_PER_SEC;
-    // printf("GRAHAM+INSERTIONSORT: %.3fs\n", timeElapsed);
-    // fout << timeElapsed << ",";
-
-    // // Graham Scan com BucketSort
-    // startgb = clock();
-    // int numConvexHullPointsGrahamBucketSort = grahamScan(points, numPoints, &convexHull, 3);
-    // endgb = clock();
-    // timeElapsed = ((double)(endgb - startgb)) / CLOCKS_PER_SEC;
-    // printf("GRAHAM+BUCKETSORT: %.3fs\n", timeElapsed);
-    // fout << timeElapsed << ",";
 
     printf("GRAHAM+MERGESORT: %.3fs\n", timeElapsed[1]);
     printf("GRAHAM+INSERTIONSORT: %.3fs\n", timeElapsed[0]);
@@ -82,7 +64,6 @@ int main(int argc, char *argv[])
     getrusage(RUSAGE_SELF, &jarvis_start);
     clock_gettime(CLOCK_MONOTONIC, &jarvis_start_clock);
 
-    // int numConvexHullPointsJarvisMergeSort = jarvisMarch(points, numPoints, &convexHull);
     jarvisMarch(points, numPoints, &convexHull);
 
     getrusage(RUSAGE_SELF, &jarvis_end);

@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <time.h>
 
 #ifndef POINT_HPP
 #define POINT_HPP
