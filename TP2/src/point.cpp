@@ -2,6 +2,7 @@
 #include <time.h>
 
 #include "point.hpp"
+using namespace std; 
 
 // Função para ler os pontos a partir de um arquivo
 int readPointsFromFile(const char *filename, Point **points)
@@ -38,4 +39,10 @@ int readPointsFromFile(const char *filename, Point **points)
     }
     arquivo.close();
     return numPoints;
+}
+
+// Função para calcular o produto vetorial de três pontos
+int crossProduct(Point p, Point q, Point r)
+{
+    return (q.x - p.x) * (r.y - p.y) - (q.y - p.y) * (r.x - p.x);
 }

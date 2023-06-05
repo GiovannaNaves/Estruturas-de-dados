@@ -14,3 +14,6 @@ typedef struct
 // Função para ler os pontos a partir de um arquivo
 int readPointsFromFile(const char *filename, Point **points);
 
+// Função para calcular o produto vetorial de três pontos
+int crossProduct(Point p, Point q, Point r);
+
