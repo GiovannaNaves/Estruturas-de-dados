@@ -2,7 +2,6 @@
 #include <time.h>
 
 #include "convexhull.hpp"
-#include "point.hpp"
 
 // Função para imprimir o fecho convexo
 void printConvexHull(Point *convexHull, int numPoints)

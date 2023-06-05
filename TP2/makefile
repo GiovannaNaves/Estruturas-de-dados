@@ -5,7 +5,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/main.o
-
+HDRS = $(INC)/point.hpp $(INC)/convexhull.hpp
 CFLAGS = -Wall -c -I$(INC) -pg
 
 EXE = $(BIN)/main
@@ -18,6 +18,7 @@ $(BIN)/main: $(OBJS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp 
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
+
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
