@@ -16,14 +16,17 @@ int main(int argc, char *argv[])
 {
 
     ofstream fout("graph.csv", ios::app);
+    const char *filename;
 
-    if (argc < 2)
-    {
-        printf("Uso: %s <arquivo de entrada>\n", argv[0]);
-        return 1;
+    for(int i=1; i<argc; i++){
+        char n = argv[i][0];
+        switch(n){
+            case 'f':
+            filename = argv[i+1];
+            break;
+        }
     }
 
-    const char *filename = argv[1];
     Point *points = nullptr;
     int numPoints = readPointsFromFile(filename, &points);
     if (numPoints == 0)

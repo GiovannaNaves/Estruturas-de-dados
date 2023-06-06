@@ -11,7 +11,7 @@ CFLAGS = -Wall -c -I$(INC) -pg
 EXE = $(BIN)/main
 
 run:  $(EXE)
-	$(EXE) pontos.txt
+	$(EXE) fecho pontos.txt
 
 $(BIN)/main: $(OBJS)
 	$(CC) -o $(BIN)/main $(OBJS) $(LIBS) -pg
