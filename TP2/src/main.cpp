@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     printConvexHull(convexHull, numConvexHullPointsJarvisMergeSort);
 
     // 1 - insertion, 2 - merge, 3 - bucket
-    for (int i = 1; i <= 2; i++)
+    for (int i = 1; i <= 3; i++)
     {
         getrusage(RUSAGE_SELF, &graham_start);
         clock_gettime(CLOCK_MONOTONIC, &graham_start_clock);

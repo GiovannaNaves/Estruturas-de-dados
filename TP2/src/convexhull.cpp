@@ -250,43 +250,114 @@ void insertionSort(Point *points, int numPoints)
     }
 }
 
+int digitCountOfMaxX(Point *points, int numPoints, int numBuckets)
+{
+    int i, max = points[0].x, cnt = 0;
+    for (i = 1; i < numPoints; i++)
+    {
+        if (points[i].x > max)
+            max = points[i].x;
+    }
+    while (max > 0)
+    {
+        cnt++;
+        max = max / 10;
+    }
+
+    return cnt;
+}
+
 // Bucket Sort for the given array of points
 void bucketSort(Point *points, int numPoints)
 {
+    // https://favtutor.com/blogs/bucket-sort-cpp
+
     // Create buckets based on the maximum value of x
-    int numBuckets = 100;
-    Point **buckets = (Point **)malloc(numBuckets * sizeof(Point *));
+    const int numBuckets = 100;
+    Point *bucket[numBuckets];
 
-    // Initialize each bucket with 0 points
     for (int i = 0; i < numBuckets; i++)
+        bucket[i] = new Point[numPoints];
+
+    static int i, elemsPerBucket[numBuckets], idxInBucket, l, d = 1;
+    int count;
+    count = digitCountOfMaxX(points, numPoints, numBuckets);
+
+    for (int m = 0; m < count; m++)
     {
-        buckets[i] = NULL;
+
+        for (i = 0; i < numBuckets; i++)
+            elemsPerBucket[i] = 0;
+
+        for (i = 0; i < numPoints; i++)
+        {
+            idxInBucket = (points[i].x / d) % numBuckets;
+            bucket[idxInBucket][elemsPerBucket[idxInBucket]] = points[i];
+            elemsPerBucket[idxInBucket]++;
+        }
+
+        l = 0;
+        for (i = 0; i < numBuckets; i++)
+        {
+            for (idxInBucket = 0; idxInBucket < elemsPerBucket[i]; idxInBucket++)
+            {
+                points[i] = bucket[i][idxInBucket];
+                l++;
+            }
+        }
+
+        d *= numBuckets;
     }
 
-    // Assign each point to its respective bucket
-    for (int i = 0; i < numPoints; i++)
-    {
-        int index = points[i].x;
-        Point *newPoint = (Point *)malloc(sizeof(Point));
-        *newPoint = points[i];
-        newPoint->y = buckets[index]->y;
-        buckets[index] = newPoint;
-    }
+    return;
+    /*
+        std::cout << "1" << std::endl;
 
-    // Sort each bucket using Insertion Sort
-    for (int i = 0; i < numBuckets; i++)
-    {
-        Point *bucket = buckets[i];
-        insertionSort(bucket, numPoints); // Sort the points within the bucket
-    }
+        // Point **buckets = (Point **)malloc(numBuckets * sizeof(Point *));
 
-    // Copy the sorted points back to the original array
-    int k = 0;
-    for (int i = 0; i < numBuckets; i++)
-    {
-        Point *bucket = buckets[i];
-        points[k++] = *bucket;
+        std::cout << "2" << std::endl;
 
-    }
+        // Initialize each bucket with 0 points
+        for (int i = 0; i < numBuckets; i++)
+        {
+            buckets[i] = NULL;
+        }
 
+        std::cout << "3" << std::endl;
+
+        // Assign each point to its respective bucket
+        for (int i = 0; i < numPoints; i++)
+        {
+            std::cout << "a" << std::endl;
+            int index = points[i].x % numBuckets;
+            std::cout << "b" << std::endl;
+            // Point *newPoint = new (Point);
+
+            std::cout << "c" << std::endl;
+            //*newPoint = points[i];
+            std::cout << index << std::endl;
+
+            newPoint->y = buckets[index]->y;
+            std::cout << "e" << std::endl;
+            buckets[index] = newPoint;
+            std::cout << "f" << std::endl;
+        }
+
+        std::cout << "4" << std::endl;
+
+        // Sort each bucket using Insertion Sort
+        for (int i = 0; i < numBuckets; i++)
+        {
+            Point *bucket = buckets[i];
+            insertionSort(bucket, numPoints); // Sort the points within the bucket
+        }
+        std::cout << "5" << std::endl;
+
+        // Copy the sorted points back to the original array
+        int k = 0;
+        for (int i = 0; i < numBuckets; i++)
+        {
+            Point *bucket = buckets[i];
+            points[k++] = *bucket;
+        }*/
 }
