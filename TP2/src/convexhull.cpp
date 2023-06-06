@@ -253,16 +253,8 @@ void insertionSort(Point *points, int numPoints)
 // Bucket Sort for the given array of points
 void bucketSort(Point *points, int numPoints)
 {
-    // Find the maximum value of x to determine the number of buckets
-    int max_x = points[0].x;
-    for (int i = 1; i < numPoints; i++)
-    {
-        if (points[i].x > max_x)
-            max_x = points[i].x;
-    }
-
     // Create buckets based on the maximum value of x
-    int numBuckets = max_x + 1;
+    int numBuckets = 100;
     Point **buckets = (Point **)malloc(numBuckets * sizeof(Point *));
 
     // Initialize each bucket with 0 points
@@ -294,22 +286,7 @@ void bucketSort(Point *points, int numPoints)
     {
         Point *bucket = buckets[i];
         points[k++] = *bucket;
-        //     while (bucket != NULL)
-        // {
-        //     bucket = bucket->y;
-        // }
+
     }
 
-    // Free the memory allocated for buckets
-    // for (int i = 0; i < numBuckets; i++)
-    // {
-    //     Point *bucket = buckets[i];
-    //     while (bucket != NULL)
-    //     {
-    //         Point *temp = bucket;
-    //         bucket = bucket->y;
-    //         free(temp);
-    //     }
-    // }
-    // free(buckets);
 }
