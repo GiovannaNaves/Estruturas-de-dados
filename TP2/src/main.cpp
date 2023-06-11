@@ -18,14 +18,7 @@ int main(int argc, char *argv[])
     ofstream fout("graph.csv", ios::app);
     const char *filename;
 
-    for(int i=1; i<argc; i++){
-        char n = argv[i][0];
-        switch(n){
-            case 'f':
-            filename = argv[i+1];
-            break;
-        }
-    }
+    filename = argv[1];
 
     Point *points = nullptr;
     int numPoints = readPointsFromFile(filename, &points);

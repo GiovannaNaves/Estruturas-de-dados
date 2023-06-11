@@ -20,6 +20,7 @@ int ConvexHull::grahamScan(Point *points, int numPoints, Point **convexHull, int
 {
     if (numPoints < 3)
     {
+        cout << "Não há pontos suficientes para o cálculo de um fecho convexo." << endl;
         return 0;
     }
 
@@ -101,6 +102,7 @@ int ConvexHull::jarvisMarch(Point *points, int numPoints, Point **convexHull)
 {
     if (numPoints < 3)
     {
+        cout << "Não há pontos suficientes para o cálculo de um fecho convexo." << endl;
         return 0;
     }
 
