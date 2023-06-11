@@ -5,10 +5,10 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 
-using namespace std;
-
 #include "convexhull.hpp"
 #include "point.hpp"
+
+using namespace std;
 
 Point points[100];
 
@@ -41,8 +41,9 @@ int main(int argc, char *argv[])
     struct timespec graham_start_clock, graham_end_clock, jarvis_start_clock, jarvis_end_clock;
     double timeElapsed[4];
 
-    int numConvexHullPointsJarvisMergeSort = jarvisMarch(points, numPoints, &convexHull);
-    printConvexHull(convexHull, numConvexHullPointsJarvisMergeSort);
+    ConvexHull jarvis;
+    int numConvexHullPointsJarvisMergeSort = jarvis.jarvisMarch(points, numPoints, &convexHull);
+    jarvis.printConvexHull(convexHull, numConvexHullPointsJarvisMergeSort);
 
     // 1 - insertion, 2 - merge, 3 - bucket
     for (int i = 1; i <= 3; i++)
@@ -50,24 +51,25 @@ int main(int argc, char *argv[])
         getrusage(RUSAGE_SELF, &graham_start);
         clock_gettime(CLOCK_MONOTONIC, &graham_start_clock);
 
-        int numConvexHullPointsGrahamMergeSort = grahamScan(points, numPoints, &convexHull, i);
+        ConvexHull graham;
+        int numConvexHullPointsGrahamMergeSort = graham.grahamScan(points, numPoints, &convexHull, i);
 
         getrusage(RUSAGE_SELF, &graham_end);
         clock_gettime(CLOCK_MONOTONIC, &graham_end_clock);
 
         timeElapsed[i - 1] = (graham_end_clock.tv_sec - graham_start_clock.tv_sec) + (graham_end_clock.tv_nsec - graham_start_clock.tv_nsec) / 10e9;
     }
-
-    printf("GRAHAM+MERGESORT: %.3fs\n", timeElapsed[1]);
-    printf("GRAHAM+INSERTIONSORT: %.3fs\n", timeElapsed[0]);
-    printf("GRAHAM+BUCKETSORT: %.3fs\n", timeElapsed[2]);
+    cout << fixed << setprecision(3);
+    cout << "GRAHAM+MERGESORT: " << timeElapsed[1] << "s" << endl;
+    cout << "GRAHAM+INSERTIONSORT: " << timeElapsed[0] << "s" << endl;
+    cout << "GRAHAM+BUCKETSORT: " << timeElapsed[2] << "s" << endl;
     fout << timeElapsed[1] << "," << timeElapsed[0] << "," << timeElapsed[2] << ",";
 
     // Jarvis March
     getrusage(RUSAGE_SELF, &jarvis_start);
     clock_gettime(CLOCK_MONOTONIC, &jarvis_start_clock);
-
-    jarvisMarch(points, numPoints, &convexHull);
+    
+    jarvis.jarvisMarch(points, numPoints, &convexHull);
 
     getrusage(RUSAGE_SELF, &jarvis_end);
     clock_gettime(CLOCK_MONOTONIC, &jarvis_end_clock);

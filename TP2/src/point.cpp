@@ -8,10 +8,9 @@ int readPointsFromFile(const char *filename, Point **points)
 {
     ifstream arquivo;
     arquivo.open(filename);
-    // FILE *file = fopen(filename, "r");
     if (!arquivo.is_open())
     {
-        printf("Erro ao abrir o arquivo.\n");
+        cout << "Erro ao abrir o arquivo." << endl;
         return 0;
     }
 
@@ -23,7 +22,7 @@ int readPointsFromFile(const char *filename, Point **points)
     arquivo.clear();
     arquivo.seekg(0, arquivo.beg);
     // Alocar memória para os pontos
-    *points = new Point[numPoints]; //(Point *)malloc(numPoints * sizeof(Point));
+    *points = new Point[numPoints];
 
     // // Ler os pontos do arquivo
     int i = 0;

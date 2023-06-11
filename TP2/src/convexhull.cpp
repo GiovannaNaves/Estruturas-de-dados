@@ -2,19 +2,21 @@
 
 #include "convexhull.hpp"
 
+using namespace std;
+
 // Função para imprimir o fecho convexo
-void printConvexHull(Point *convexHull, int numPoints)
+void ConvexHull::printConvexHull(Point *convexHull, int numPoints)
 {
-    printf("FECHO CONVEXO:\n");
+    cout << "FECHO CONVEXO:" << endl;
     for (int i = 0; i < numPoints; i++)
     {
-        printf("%d %d\n", convexHull[i].x, convexHull[i].y);
+        cout << convexHull[i].x << " " << convexHull[i].y << endl;
     }
-    printf("\n");
+    cout << endl;
 };
 
 // Algoritmo de fecho convexo - Graham Scan
-int grahamScan(Point *points, int numPoints, Point **convexHull, int sortType)
+int ConvexHull::grahamScan(Point *points, int numPoints, Point **convexHull, int sortType)
 {
     if (numPoints < 3)
     {
@@ -43,14 +45,17 @@ int grahamScan(Point *points, int numPoints, Point **convexHull, int sortType)
     Point temp = points[0];
     points[0] = points[minYIndex];
     points[minYIndex] = temp;
+        ConvexHull merge;
+        ConvexHull insertion;
+        ConvexHull bucket;
 
     // Ordenar os pontos pelo ângulo polar em relação ao ponto mínimo
     if (sortType == 2)
-        mergeSort(&points[1], 0, numPoints - 1);
+        merge.mergeSort(&points[1], 0, numPoints - 1);
     if (sortType == 1)
-        insertionSort(&points[1], numPoints - 1);
+        insertion.insertionSort(&points[1], numPoints - 1);
     if (sortType == 3)
-        bucketSort(&points[1], numPoints - 1);
+        bucket.bucketSort(&points[1], numPoints - 1);
 
     // Remover pontos colineares
     int m = 1;
@@ -70,7 +75,7 @@ int grahamScan(Point *points, int numPoints, Point **convexHull, int sortType)
     }
 
     // Pilha para armazenar os pontos do fecho convexo
-    Point *hull = new Point[m]; //(Point*)malloc(m * sizeof(Point));
+    Point *hull = new Point[m];
     int top = 2;
     hull[0] = points[0];
     hull[1] = points[1];
@@ -92,7 +97,7 @@ int grahamScan(Point *points, int numPoints, Point **convexHull, int sortType)
 }
 
 // Algoritmo de fecho convexo - Jarvis March
-int jarvisMarch(Point *points, int numPoints, Point **convexHull)
+int ConvexHull::jarvisMarch(Point *points, int numPoints, Point **convexHull)
 {
     if (numPoints < 3)
     {
@@ -145,13 +150,13 @@ int jarvisMarch(Point *points, int numPoints, Point **convexHull)
 }
 
 // Implementação do algoritmo de ordenação MergeSort
-void merge(Point *points, int low, int mid, int high)
+void ConvexHull::merge(Point *points, int low, int mid, int high)
 {
     int leftLength = mid - low + 1;
     int rightLength = high - mid;
 
-    Point *left = new Point[leftLength];   //(Point *)malloc(leftLength * sizeof(Point));
-    Point *right = new Point[rightLength]; // Point *)malloc(rightLength * sizeof(Point));
+    Point *left = new Point[leftLength];
+    Point *right = new Point[rightLength];
 
     for (int i = 0; i < leftLength; i++)
     {
@@ -223,7 +228,7 @@ void merge(Point *points, int low, int mid, int high)
     delete[] right;
 }
 
-void mergeSort(Point *points, int low, int high)
+void ConvexHull::mergeSort(Point *points, int low, int high)
 {
     if (low < high)
     {
@@ -235,7 +240,7 @@ void mergeSort(Point *points, int low, int high)
 }
 
 // Implementação do algoritmo de ordenação InsertionSort
-void insertionSort(Point *points, int numPoints)
+void ConvexHull::insertionSort(Point *points, int numPoints)
 {
     for (int i = 1; i < numPoints; i++)
     {
@@ -250,7 +255,8 @@ void insertionSort(Point *points, int numPoints)
     }
 }
 
-int digitCountOfMaxX(Point *points, int numPoints, int numBuckets)
+// Função auxiliar para o BucketSort
+int ConvexHull::digitCountOfMaxX(Point *points, int numPoints, int numBuckets)
 {
     int i, max = points[0].x, cnt = 0;
     for (i = 1; i < numPoints; i++)
@@ -267,11 +273,9 @@ int digitCountOfMaxX(Point *points, int numPoints, int numBuckets)
     return cnt;
 }
 
-// Bucket Sort for the given array of points
-void bucketSort(Point *points, int numPoints)
+// Implementação do algoritmo de ordenação BucketSort
+void ConvexHull::bucketSort(Point *points, int numPoints)
 {
-    // https://favtutor.com/blogs/bucket-sort-cpp
-
     // Create buckets based on the maximum value of x
     const int numBuckets = 100;
     Point *bucket[numBuckets];
@@ -308,56 +312,5 @@ void bucketSort(Point *points, int numPoints)
 
         d *= numBuckets;
     }
-
     return;
-    /*
-        std::cout << "1" << std::endl;
-
-        // Point **buckets = (Point **)malloc(numBuckets * sizeof(Point *));
-
-        std::cout << "2" << std::endl;
-
-        // Initialize each bucket with 0 points
-        for (int i = 0; i < numBuckets; i++)
-        {
-            buckets[i] = NULL;
-        }
-
-        std::cout << "3" << std::endl;
-
-        // Assign each point to its respective bucket
-        for (int i = 0; i < numPoints; i++)
-        {
-            std::cout << "a" << std::endl;
-            int index = points[i].x % numBuckets;
-            std::cout << "b" << std::endl;
-            // Point *newPoint = new (Point);
-
-            std::cout << "c" << std::endl;
-            //*newPoint = points[i];
-            std::cout << index << std::endl;
-
-            newPoint->y = buckets[index]->y;
-            std::cout << "e" << std::endl;
-            buckets[index] = newPoint;
-            std::cout << "f" << std::endl;
-        }
-
-        std::cout << "4" << std::endl;
-
-        // Sort each bucket using Insertion Sort
-        for (int i = 0; i < numBuckets; i++)
-        {
-            Point *bucket = buckets[i];
-            insertionSort(bucket, numPoints); // Sort the points within the bucket
-        }
-        std::cout << "5" << std::endl;
-
-        // Copy the sorted points back to the original array
-        int k = 0;
-        for (int i = 0; i < numBuckets; i++)
-        {
-            Point *bucket = buckets[i];
-            points[k++] = *bucket;
-        }*/
 }
