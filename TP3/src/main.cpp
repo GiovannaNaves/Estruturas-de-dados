@@ -2,9 +2,8 @@
 #include <string>
 #include <unordered_map>
 #include "queue.hpp"
-using namespace std;
 
-// A Tree node
+using namespace std;
 
 // Function to allocate a new tree node
 Node* getNode(char ch, int freq, Node* left, Node* right)
@@ -20,8 +19,7 @@ Node* getNode(char ch, int freq, Node* left, Node* right)
 }
 
 // Comparison object to be used to order the heap
-struct comp
-{
+struct comp {
 	bool operator()(Node* l, Node* r)
 	{
 		// highest priority item has lowest frequency
