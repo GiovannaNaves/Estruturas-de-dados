@@ -1,4 +1,4 @@
-#ifndef FILA_ENC_H
+/*#ifndef FILA_ENC_H
 #define FILA_ENC_H
 
 struct Node
@@ -91,3 +91,5 @@ void FilaEncadeada<T>::Limpa(){
 }
 
 #endif
+
+*/
