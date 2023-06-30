@@ -5,7 +5,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/queue.o $(OBJ)/main.o $(OBJ)/huffman.o
-HDRS = $(INC)/queue.hpp
+HDRS = $(INC)/queue.hpp $(INC)/huffman.hpp 
 CFLAGS = -Wall -c -I$(INC) 
 
 EXE = $(BIN)/main
@@ -15,9 +15,6 @@ run:  $(EXE)
 
 $(BIN)/main: $(OBJS)
 	$(CC) -o $(BIN)/main $(OBJS) $(LIBS) 
-
-$(OBJ)/huffman.o: $(HDRS) $(SRC)/huffman.cpp 
-	$(CC) $(CFLAGS) -o $(OBJ)/huffman.o $(SRC)/huffman.cpp 
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp 
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 

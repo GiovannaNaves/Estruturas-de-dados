@@ -2,27 +2,27 @@
 #include <fstream>
 #include <string>
 #include "queue.hpp"
-#include "huffman.cpp"
+#include "huffman.hpp"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
 
-    // Se não der nome do arquivo -> erro
+    // Error if there's no file's name
     if (argc < 2)
     {
         std::cerr << "Erro: Nenhum arquivo encontrado" << std::endl;
         return 1;
     }
         
-    // Pega o nome do arquivo
+    // Gets the file's name
     std::string filename(argv[1]);
 
-    // Abre o arquivo
+    // Opens the file
     std::ifstream infile(filename);
 
-    // Checa se abriu
+    // Checks if the file's open
     if (!infile.is_open())
     {
         std::cout << "Erro: não foi possível abrir o arquivo" << filename << std::endl;
@@ -35,8 +35,8 @@ int main(int argc, char *argv[])
     {
         text += line;
     }
-
-    buildHuffmanTree(text);
+    Huffman h; 
+    h.buildHuffmanTree(text);
 
     return 0;
 }
