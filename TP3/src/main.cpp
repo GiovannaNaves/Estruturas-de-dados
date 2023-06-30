@@ -1,14 +1,10 @@
 #include <iostream>
-#include <string>
+#include "queue.hpp"
+
 using namespace std;
 
-// A Tree node
-struct Node
-{
-    char ch;
-    int freq;
-    Node* left, * right;
-};
+
+
 
 // Function to allocate a new tree node
 Node* getNode(char ch, int freq, Node* left, Node* right)
@@ -165,7 +161,7 @@ void buildHuffmanTree(string text)
 // Huffman coding algorithm
 int main()
 {
-    string text = "Hello.";
+    string text = "Teste super teste muito legal o teste.";
 
     buildHuffmanTree(text);
 
