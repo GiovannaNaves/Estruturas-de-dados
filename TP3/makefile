@@ -10,9 +10,6 @@ CFLAGS = -Wall -c -I$(INC)
 
 EXE = $(BIN)/main
 
-run:  $(EXE)
-	$(EXE) -c entrada.txt
-
 $(BIN)/main: $(OBJS)
 	$(CC) -o $(BIN)/main $(OBJS) $(LIBS) 
 
