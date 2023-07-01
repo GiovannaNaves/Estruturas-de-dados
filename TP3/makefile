@@ -11,7 +11,7 @@ CFLAGS = -Wall -c -I$(INC)
 EXE = $(BIN)/main
 
 run:  $(EXE)
-	$(EXE) entrada.txt
+	$(EXE) -c entrada.txt
 
 $(BIN)/main: $(OBJS)
 	$(CC) -o $(BIN)/main $(OBJS) $(LIBS) 

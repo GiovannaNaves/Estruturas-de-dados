@@ -69,96 +69,93 @@ class Huffman {
     }
 
     // Builds Huffman Tree and decode given input text
-    void buildHuffmanTree(string text)
+    void buildHuffmanTree(string text, char action)
     {
-        // count frequency of appearance of each character
-        // and store it in an array
-        const int MAX_CHAR = 256;
-        int freq[MAX_CHAR] = { 0 };
-        for (char ch : text) {
-            freq[ch]++;
-        }
-
-        // Create an array to store live nodes of Huffman tree;
-        Node* pq[MAX_CHAR] = { nullptr };
-
-        // Create a leaf node for each character and add it
-        // to the array.
-        int nodeCount = 0;
-        for (int i = 0; i < MAX_CHAR; i++) {
-            if (freq[i] != 0) {
-                pq[nodeCount] = getNode(static_cast<char>(i), freq[i], nullptr, nullptr);
-                nodeCount++;
+            // count frequency of appearance of each character and store it in an array
+            const int MAX_CHAR = 256;
+            int freq[MAX_CHAR] = { 0 };
+            for (char ch : text) {
+                freq[ch]++;
             }
-        }
 
-        // do till there is more than one node in the array
-        while (nodeCount > 1)
-        {
-            // Find the two nodes with the lowest frequency
-            int min1 = 0;
-            int min2 = 1;
-            for (int i = 2; i < nodeCount; i++) {
-                if (pq[i]->freq < pq[min1]->freq) {
-                    min2 = min1;
-                    min1 = i;
-                }
-                else if (pq[i]->freq < pq[min2]->freq) {
-                    min2 = i;
+            // Create an array to store live nodes of Huffman tree;
+            Node* pq[MAX_CHAR] = { nullptr };
+
+            // Create a leaf node for each character and add it to the array.
+            int nodeCount = 0;
+            for (int i = 0; i < MAX_CHAR; i++) {
+                if (freq[i] != 0) {
+                    pq[nodeCount] = getNode(static_cast<char>(i), freq[i], nullptr, nullptr);
+                    nodeCount++;
                 }
             }
 
-            // Create a new internal node with these two nodes
-            // as children and with frequency equal to the sum
-            // of the two nodes' frequencies. Replace the two nodes
-            // with the new node in the array.
-            int sum = pq[min1]->freq + pq[min2]->freq;
-                Node* newNode = getNode('\0', sum, pq[min1], pq[min2]);
-            pq[min1] = newNode;
+            // do till there is more than one node in the array
+            while (nodeCount > 1)
+            {
+                // Find the two nodes with the lowest frequency
+                int min1 = 0;
+                int min2 = 1;
+                for (int i = 2; i < nodeCount; i++) {
+                    if (pq[i]->freq < pq[min1]->freq) {
+                        min2 = min1;
+                        min1 = i;
+                    }
+                    else if (pq[i]->freq < pq[min2]->freq) {
+                        min2 = i;
+                    }
+                }
 
-            // Shift the array to remove the second node
-            for (int i = min2; i < nodeCount - 1; i++) {
-                pq[i] = pq[i + 1];
+                int sum = pq[min1]->freq + pq[min2]->freq;
+                    Node* newNode = getNode('\0', sum, pq[min1], pq[min2]);
+                pq[min1] = newNode;
+
+                for (int i = min2; i < nodeCount - 1; i++) {
+                    pq[i] = pq[i + 1];
+                }
+
+                nodeCount--;
             }
 
-            nodeCount--;
-        }
+            // root stores pointer to root of Huffman Tree
+            Node* root = pq[0];
 
-        // root stores pointer to root of Huffman Tree
-        Node* root = pq[0];
+            // traverse the Huffman Tree and store Huffman Codes in a string array. Also prints them
+            string huffmanCode[MAX_CHAR];
+            encode(root, "", huffmanCode);
 
-        // traverse the Huffman Tree and store Huffman Codes
-        // in a string array. Also prints them
-        string huffmanCode[MAX_CHAR];
-        encode(root, "", huffmanCode);
-
-    /*
-        cout << "Huffman Codes are :\n" << '\n';
-        for (int i = 0; i < MAX_CHAR; i++) {
-            if (!huffmanCode[i].empty()) {
-                cout << static_cast<char>(i) << " " << huffmanCode[i] << '\n';
+        /*
+            cout << "Huffman Codes are :\n" << '\n';
+            for (int i = 0; i < MAX_CHAR; i++) {
+                if (!huffmanCode[i].empty()) {
+                    cout << static_cast<char>(i) << " " << huffmanCode[i] << '\n';
+                }
             }
+        */
+        if (action == 'c'){
+            // print encoded string
+            string encodedStr = "";
+            for (char ch : text) {
+                encodedStr += huffmanCode[ch];
+            }
+            cout << encodedStr << '\n';
+        }
+       
+        if (action == 'd'){
+            string encodedStr = "";
+            for (char ch : text) {
+                encodedStr += huffmanCode[ch];
+            }
+            // traverse the Huffman Tree again and this time
+            // decode the encoded string
+            int index = -1;
+            while (index < (int)encodedStr.size() - 2) {
+                decode(root, index, encodedStr);
+            }
+            // deallocate memory
+            delete root;
         }
 
-        cout << "\nOriginal string was :\n" << text << '\n';
-    */
-
-        // print encoded string
-        string encodedStr = "";
-        for (char ch : text) {
-            encodedStr += huffmanCode[ch];
-        }
-
-        cout << encodedStr << '\n';
-
-        // traverse the Huffman Tree again and this time
-        // decode the encoded string
-        int index = -1;
-        while (index < (int)encodedStr.size() - 2) {
-            decode(root, index, encodedStr);
-        }
-        // deallocate memory
-        delete root;
     }
 
 };

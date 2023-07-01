@@ -8,7 +8,23 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    char action;
 
+    for(int i=1; i<argc; i++){
+        char option = argv[i][1];
+        try{
+            switch(option){
+                case 'c':
+                    action = 'c';
+                    break;
+                case 'd':
+                    action = 'd';
+                    break;
+            }
+        }
+        catch (...){}
+
+    }
     // Error if there's no file's name
     if (argc < 2)
     {
@@ -17,7 +33,7 @@ int main(int argc, char *argv[])
     }
         
     // Gets the file's name
-    std::string filename(argv[1]);
+    std::string filename(argv[2]);
 
     // Opens the file
     std::ifstream infile(filename);
@@ -31,12 +47,13 @@ int main(int argc, char *argv[])
 
     std::string text;
     std::string line;
+
     while (std::getline(infile, line))
     {
         text += line;
     }
     Huffman h; 
-    h.buildHuffmanTree(text);
+    h.buildHuffmanTree(text, action);
 
     return 0;
 }
