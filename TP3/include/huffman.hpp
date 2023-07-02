@@ -5,6 +5,7 @@
 #include <vector>
 #include <cstdio>
 #include <string>
+#include <bitset>
 #include "queue.hpp"
 
 using namespace std;
@@ -32,10 +33,8 @@ class Huffman {
         }
     };
 
-    // traverse the Huffman Tree and store Huffman Codes
-    // in a string array.
-    void encode(Node* root, string str,
-        string huffmanCode[])
+    // traverse the Huffman Tree and store Huffman Codes in a string array.
+    void encode(Node* root, string str, string huffmanCode[])
     {
         if (root == nullptr)
             return;
@@ -47,6 +46,7 @@ class Huffman {
 
         encode(root->left, str + "0", huffmanCode);
         encode(root->right, str + "1", huffmanCode);
+        
     }
 
     // traverse the Huffman Tree and decode the encoded string
@@ -99,7 +99,8 @@ class Huffman {
                     for (char c : code)
                         WriteBit(f, 1, bit_buffer, current_bit);
 
-                    WriteBit(f, 0, bit_buffer, current_bit);
+                    WriteBit(f, 0, bit_buffer, current_bit);                
+
                 }
 
                 Flush_Bits(f, bit_buffer, current_bit);
@@ -178,8 +179,6 @@ class Huffman {
         }
        
         if (action == 'd'){
-            std::string encodedStr;
-
             // Open the binary file for reading
             FILE* f = fopen("compressed.bin", "rb");
             if (f == nullptr) {
@@ -191,19 +190,41 @@ class Huffman {
             long fileSize = ftell(f);
             fseek(f, 0, SEEK_SET);
 
+            string encodedStr;
             encodedStr.resize(fileSize);
             fread(&encodedStr[0], 1, fileSize, f);
 
             // Close the file
             fclose(f);
 
+            string binaryString;
+            for (char ch : encodedStr) {
+                std::bitset<8> bits(ch);
+                binaryString += bits.to_string();
+            }
+
+            // Find the position of the first '0' after the Huffman-encoded message
+            size_t zeroPos = binaryString.find_last_not_of('0');
+            // Remove the extra zeros based on the position of the first '0'
+            binaryString.resize(zeroPos + 1);
+
             int index = -1;
             string decodedStr;
-            
-            while (index < (int)encodedStr.size()) {
-                decode(root, index, encodedStr, decodedStr);
+
+            while (index < static_cast<int>(binaryString.size()) - 1) {
+                decode(root, index, binaryString, decodedStr);
             }
-            cout << decodedStr << endl;
+
+            ofstream outputFile("saida.txt");
+            if (outputFile.is_open()) {
+                outputFile << decodedStr;
+                outputFile.close();
+                cout << "Decoded string has been written to saida.txt." << endl;
+            }
+            else {
+                cout << "Error opening saida.txt for writing." << endl;
+            }
+
             // deallocate memory
             delete root;
         }
