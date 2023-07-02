@@ -167,7 +167,7 @@ class Huffman {
             // Create and open the binary file for writing
             FILE* f = fopen("compressed.bin", "wb");
             if (f == nullptr) {
-                cout << "Error opening file for writing." << endl;
+                cout << "Erro na abertura do arquivo para escrita." << endl;
                 return;
             }
 
@@ -176,13 +176,14 @@ class Huffman {
 
             // Close the file
             fclose(f);
+            cout << "A sequência compactada foi escrita no arquivo compressed.bin" << endl;
         }
        
         if (action == 'd'){
             // Open the binary file for reading
             FILE* f = fopen("compressed.bin", "rb");
             if (f == nullptr) {
-                cout << "Error opening file for reading." << endl;
+                cout << "Erro na abertura do arquivo para leitura." << endl;
                 return;
             }
             // Read the binary file and store its content in encodedStr
@@ -219,10 +220,10 @@ class Huffman {
             if (outputFile.is_open()) {
                 outputFile << decodedStr;
                 outputFile.close();
-                cout << "Decoded string has been written to saida.txt." << endl;
+                cout << "A saída foi escrita no arquivo saida.txt." << endl;
             }
             else {
-                cout << "Error opening saida.txt for writing." << endl;
+                cout << "Houve um erro na abertura do arquivo saida.txt." << endl;
             }
 
             // deallocate memory
