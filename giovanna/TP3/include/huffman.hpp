@@ -115,7 +115,7 @@ class Huffman {
             ifstream infile(inputFilename);
             if (!infile.is_open())
             {
-                throw "Erro: não foi possível abrir o arquivo " + inputFilename + "\n";
+                throw "Erro na abertura do arquivo para escrita. " + inputFilename + "\n";
             }
             // count frequency of appearance of each character and store it in an array
             string text, line;
@@ -186,7 +186,7 @@ class Huffman {
 
             // Close the file
             fclose(f);
-            cout << "A sequência compactada foi escrita no arquivo." << outputFilename << endl;
+            cout << "A sequência compactada foi escrita no arquivo " << outputFilename << endl;
             // deallocate memory
             delete root;
         }

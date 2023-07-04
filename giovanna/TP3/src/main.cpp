@@ -64,8 +64,7 @@ int main(int argc, char *argv[])
         
         timeElapsed[3] = (end_clock.tv_sec - start_clock.tv_sec) + (end_clock.tv_nsec - start_clock.tv_nsec) / 10e9;
 
-        printf("Tempo gasto: %.6fs\n", timeElapsed[3]);
+        printf("Tempo gasto: %.3fs\n", timeElapsed[3]);
 
     return 0;
-
 }
